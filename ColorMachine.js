@@ -14,6 +14,8 @@ var InstructionText = true;
 
 var UIHide = false;
 
+var ColorPicker;
+
 var FPS;
 
 var Saved = false;
@@ -50,6 +52,7 @@ var OriginY_Sprite;
 var ProjectileShape_Sprite;
 var ProjectileWidth_Sprite;
 var ProjectileLength_Sprite;
+var ProjectileColorType_Sprite;
 var ProjectileColor_Sprite;
 var RainbowSpeed_Sprite;
 var ProjectileNumber_Sprite;
@@ -72,7 +75,8 @@ var OriginY_Per = 50;
 var ProjectileShape = "Square";
 var ProjectileWidth = 10;
 var ProjectileLength = 10;
-var ProjectileColor = "Random";
+var ProjectileColorType = "Color";
+var ProjectileColor = 120;
 var RainbowSpeed = 0;
 var ProjectileNumber = Infinity;
 var RateOfFire = 1;
@@ -94,6 +98,7 @@ var OriginY_Per_Save;
 var ProjectileShape_Save;
 var ProjectileWidth_Save;
 var ProjectileLength_Save;
+var ProjectileColorType_Save;
 var ProjectileColor_Save;
 var RainbowSpeed_Save;
 var ProjectileNumber_Save;
@@ -112,26 +117,43 @@ function preload() {
 
 
 
+function RecreateColorPicker() {
 
-function CreateButton(side) {
+    ColorPicker = createColorPicker(ProjectileColor);
+    ColorPicker.position(15, 430);
+    ColorPicker.size(84, 40);
+    ColorPicker.input(() => { ProjectileColor = ColorPicker.value() });
+}
+
+
+function CreateButton(side, Hide) {
 
     var Side;
 
-    NumOfButtons++;
+    NumOfButtons++; 
 
     if(side == 1) Side = 60;
     else if(side == 2) Side = CanvasWidth - 60;
 
-    var CurrentButton;
+    if(!Hide) {
 
-    CurrentButton = createSprite(Side, 50 * NumOfButtons, 80, 30);
-  
-    CurrentButton.shapeColor = color(120);
-  
-    CurrentButton.onMouseOver = function() { cursor(HAND) };
-    CurrentButton.onMouseOut = function() { cursor(ARROW) };
+        var CurrentButton;
 
-    Buttons.add(CurrentButton);
+        CurrentButton = createSprite(Side, 50 * NumOfButtons, 80, 30);
+    
+        //CurrentButton.shapeColor = color(120);
+
+        CurrentButton.draw = function() {
+
+            fill(120);
+            rect(0, 0, 80, 30, 2);
+        }
+
+        CurrentButton.onMouseOver = function() { if(!UIHide) cursor(HAND) };
+        CurrentButton.onMouseOut = function() { cursor(ARROW) };
+
+        Buttons.add(CurrentButton);
+    }
 
     return CurrentButton;
 
@@ -170,9 +192,9 @@ function CreateProjectiles() {
 
       CurrentProjectile.Shape = ProjectileShape;
 
-      if(ProjectileColor == "Random" || ProjectileColor == "random") CurrentProjectile.Color = color(random(255), random(255), random(255));
+      if(ProjectileColorType == "Random" || ProjectileColorType == "random") CurrentProjectile.Color = color(random(255), random(255), random(255));
 
-      else if(ProjectileColor == "Rainbow" || ProjectileColor == "rainbow") CurrentProjectile.Color = color(Red, Green, Blue);
+      else if(ProjectileColorType == "Rainbow" || ProjectileColorType == "rainbow") CurrentProjectile.Color = color(Red, Green, Blue);
 
       else CurrentProjectile.Color = ProjectileColor;
   
@@ -191,13 +213,13 @@ function CreateProjectiles() {
         else if(this.Shape == "Circle") {
             ellipse(0, 0, this.width, this.height);
         }
+
     }
         Projectiles.add(CurrentProjectile);
 
     }
     
 }
-
 
 
 function setup() {
@@ -218,6 +240,18 @@ function setup() {
     
     Projectiles = new Group();
     Buttons = new Group();
+
+    ColorPicker = createColorPicker(color(120));
+    ColorPicker.position(15, 430);
+    ColorPicker.size(84, 40);
+    ColorPicker.input(() => { ProjectileColor = ColorPicker.value() });
+
+    this.Text = createDiv("The Color Machine!<br/><br/>This is a Game about Creativity. There is NO Goal to the Game. You can adjust the Settings on the Right and Left to make any Pattern you'd like! There are already premade Presets on the Left If you Click them and hit Startthey will show you a Few Examples.<br/><br/>When you're Ready to Run your Project just hit START.");
+    this.Text.style('font-size', "20px");
+    this.Text.style("text-align", "center");
+    this.Text.style("margin", "125px");
+    this.Text.style("color", "White")
+    this.Text.position(0, -50);
 
     // Origin:
 
@@ -240,39 +274,46 @@ function setup() {
 
     // UI Hide Button:
     UIHide_Sprite = createSprite(60, 50, 80, 30);
-    UIHide_Sprite.shapeColor = color(120);
     UIHide_Sprite.onMouseOver = function() { cursor(HAND) };
     UIHide_Sprite.onMouseOut = function() { cursor(ARROW) };
+    UIHide_Sprite.draw = function() {
+        fill(120);
+        rect(0, 0, 80, 30, 2);
+    }
 
     // Background Button:
-    BackgroundColor_Sprite = CreateButton(1); 
+    BackgroundColor_Sprite = CreateButton(1, false); 
 
     // Presets Buttons:
-    Preset1_Sprite = CreateButton(1);
-    Preset2_Sprite = CreateButton(1);
-    Preset3_Sprite = CreateButton(1);
+    Preset1_Sprite = CreateButton(1, false);
+    Preset2_Sprite = CreateButton(1, false);
+    Preset3_Sprite = CreateButton(1, false);
 
-    Save_Sprite = CreateButton(1);
-    Load_Sprite = CreateButton(1);
+    Save_Sprite = CreateButton(1, false);
+    Load_Sprite = CreateButton(1, false);
 
-    RainbowSpeed_Sprite = CreateButton(1);
+    ProjectileColorType_Sprite = CreateButton(1, false);
+
+    ProjectileColor_Sprite = CreateButton(1, true);
+
+    RainbowSpeed_Sprite = CreateButton(1, false);
+
+    ProjectileCollisionWithWallMode_Sprite = CreateButton(1, false);
 
     NumOfButtons = 0;
 
     // Options Buttons:
-    OriginX_Sprite = CreateButton(2);
-    OriginY_Sprite = CreateButton(2);
-    ProjectileShape_Sprite = CreateButton(2);
-    ProjectileWidth_Sprite = CreateButton(2);
-    ProjectileLength_Sprite = CreateButton(2);
-    ProjectileColor_Sprite = CreateButton(2);
-    ProjectileNumber_Sprite = CreateButton(2);
-    RateOfFire_Sprite = CreateButton(2);
-    ProjectileSpeed_Sprite = CreateButton(2);
-    ProjectileDirection_Sprite = CreateButton(2);
-    ProjectileSpinSpeed_Sprite = CreateButton(2);
-    ProjectileCollisionWithWallMode_Sprite = CreateButton(2);
-    Start_Sprite = CreateButton(2);
+    OriginX_Sprite = CreateButton(2, false);
+    OriginY_Sprite = CreateButton(2, false);
+    ProjectileShape_Sprite = CreateButton(2, false);
+    ProjectileWidth_Sprite = CreateButton(2, false);
+    ProjectileLength_Sprite = CreateButton(2, false);
+    RateOfFire_Sprite = CreateButton(2, false);
+    ProjectileNumber_Sprite = CreateButton(2, false);
+    ProjectileSpeed_Sprite = CreateButton(2, false);
+    ProjectileDirection_Sprite = CreateButton(2, false);
+    ProjectileSpinSpeed_Sprite = CreateButton(2, false);
+    Start_Sprite = CreateButton(2, false);
 
 
     //Actions:
@@ -358,7 +399,11 @@ function setup() {
 
     ProjectileLength_Sprite.onMouseReleased = function() { ProjectileLength = PromptsForButtons("Projectile Length", ProjectileLength) };
 
-    ProjectileColor_Sprite.onMouseReleased = function() { ProjectileColor = PromptsForButtons("Projectile Color OR Random OR Rainbow:  NO Spaces", ProjectileColor) };
+    ProjectileColorType_Sprite.onMouseReleased = function() {
+        if(ProjectileColorType == "Color") ProjectileColorType = "Random";
+        else if(ProjectileColorType == "Random") ProjectileColorType = "Rainbow";
+        else if(ProjectileColorType == "Rainbow") ProjectileColorType = "Color";
+    }
 
     RainbowSpeed_Sprite.onMouseReleased = function() {
         RainbowSpeed = PromptsForButtons("Rainbow Speed", RainbowSpeed);
@@ -402,7 +447,7 @@ function setup() {
         ProjectileShape = "Circle";
         ProjectileWidth = 15;
         ProjectileLength = 45;
-        ProjectileColor = "Rainbow";
+        ProjectileColorType = "Rainbow";
         RainbowSpeed = -3;
         ProjectileNumber = Infinity;
         RateOfFire = 100;
@@ -441,7 +486,7 @@ function setup() {
         ProjectileShape = "Square";
         ProjectileWidth = 10;
         ProjectileLength = 10;
-        ProjectileColor = "Random";
+        ProjectileColorType = "Random";
         ProjectileNumber = 500;
         RateOfFire = 100;
         ProjectileSpeed = .5;
@@ -457,7 +502,7 @@ function setup() {
         ProjectileShape_Save = ProjectileShape;
         ProjectileWidth_Save = ProjectileWidth;
         ProjectileLength_Save = ProjectileLength;
-        ProjectileColor_Save = ProjectileColor;
+        ProjectileColorType_Save = ProjectileColorType;
         RainbowSpeed_Save = RainbowSpeed;
         ProjectileNumber_Save = ProjectileNumber;
         RateOfFire_Save = RateOfFire;
@@ -484,7 +529,7 @@ function setup() {
         ProjectileShape = ProjectileShape_Save;
         ProjectileWidth = ProjectileWidth_Save;
         ProjectileLength = ProjectileLength_Save;
-        ProjectileColor = ProjectileColor_Save;
+        ProjectileColorType = ProjectileColorType_Save;
         RainbowSpeed = RainbowSpeed_Save;
         ProjectileNumber = ProjectileNumber_Save;
         RateOfFire = RateOfFire_Save;
@@ -622,7 +667,7 @@ function draw() {
 
     if(ProjectileSpinSpeed != 0 && GameStatus == "Running") OriginSpinSpeedProcessing();
 
-    if(RainbowSpeed != 0) {
+    if(RainbowSpeed != 0 && ProjectileColorType == "Rainbow" && GameStatus == "Running") {
         if(Blue <= 0 && Red >= 255) Green += Number(RainbowSpeed);
         if(Blue <= 0 && Green >= 255) Red -= Number(RainbowSpeed);
         if(Red <= 0 && Green >= 255) Blue += Number(RainbowSpeed);
@@ -640,7 +685,7 @@ function draw() {
     //console.error(getFrameRate());
     //console.log(TimeSinceFired);
     //console.log(ProjectileColor);
-    console.log("Red" + Red);
+    //console.log("Red" + Red);
     //console.log("Green" + Green);
     //console.log("Blue" + Blue);
     //console.log(RainbowSpeed);
@@ -653,35 +698,7 @@ function draw() {
     text("FPS " + FPS, CanvasWidth - 20, 10);
 
 
-    if(InstructionText) {
-
-        textSize(50);
-
-        fill(125);
-
-        text("The Color Machine!", CanvasWidth / 2, 50);
-        
-        textSize(20);
-
-        text("This is a Game about Creativity.", CanvasWidth / 2, 100);
-
-        text("There is NO Goal to the Game.", CanvasWidth / 2, 150);
-
-        text("You can adjust the Settings on the Right", CanvasWidth / 2, 200);
-
-        text("to make any Pattern you'd like!", CanvasWidth / 2, 250);
-
-        text("There are already premade Presets on the Left", CanvasWidth / 2, 300);
-
-        text("If you Click them and hit Start", CanvasWidth / 2, 350);
-
-        text("they will show you a Few Examples.", CanvasWidth / 2, 400);
-
-        text("When you're Ready to Run your Project just hit START.", CanvasWidth / 2, 450);
-
-    }
-
-    
+    if(!InstructionText) this.Text.remove();
 
     if(BackgroundColor == "Black") fill("White");
     else if(BackgroundColor == "White") fill("Black");
@@ -693,11 +710,16 @@ function draw() {
     if(UIHide) {
         CreateText("UI", "Show", 1);
         NumOfTexts = 0;
+        if(ColorPicker != null) ColorPicker.remove();
+        ColorPicker = null;
     }
     
-    else if(!UIHide) CreateText("UI", "Hide", 1);
+    else if(!UIHide) {
+        CreateText("UI", "Hide", 1);
+        if(ColorPicker == null) RecreateColorPicker();
+    }
     
-    
+    //console.log(ColorPicker);
 
     if(!UIHide) {
 
@@ -721,9 +743,22 @@ function draw() {
 
         CreateText("Load", t, 1);
 
-        textSize(11);
+        textSize(8);
+        CreateText("Projectile Color Type", ProjectileColorType, 1);
 
+        textSize(11);
+        CreateText("Projectile Color", "", 1);
+
+        textSize(11);
         CreateText("Rainbow Speed", RainbowSpeed, 1);
+
+        textSize(9);
+        CreateText("With Wall Mode", ProjectileCollisionWithWallMode, 1);
+
+        textSize(9);
+        text("Projectile Collision", 60, 50 * NumOfTexts - 26);
+
+        
 
         NumOfTexts = 0;
 
@@ -735,16 +770,13 @@ function draw() {
         CreateText("Projectile Shape", ProjectileShape, 2);
         CreateText("Projectile Width", ProjectileWidth, 2);
         CreateText("Projectile Length", ProjectileLength, 2);
-        CreateText("Projectile Color", ProjectileColor, 2);
+        CreateText("Rate of Fire", RateOfFire + " per Sec", 2);
         textSize(8);
         CreateText("Number of Projectiles", ProjectileNumber, 2);
-        CreateText("Rate of Fire", RateOfFire + " per Sec", 2);
         CreateText("Projectile Speed", ProjectileSpeed, 2);
         CreateText("Origin Direction", Math.floor(ProjectileDirection), 2);
         textSize(9);
         CreateText("Origin Spin Speed", ProjectileSpinSpeed, 2);
-        CreateText("With Wall Mode", ProjectileCollisionWithWallMode, 2);
-        text("Projectile Collision", CanvasWidth - 60, 50 * NumOfTexts - 26);
         CreateText(Projectiles.length + " Projectiles", StartText, 2);
 
         NumOfTexts = 0;
@@ -753,17 +785,11 @@ function draw() {
 }
 
 
-
 function Cleaner() {
-  
-    CleanGroup(Projectiles);
-}
-  
-function CleanGroup(SpriteGroup) {
     
-    for(var i = 0; i < SpriteGroup.length;i++) {
+    for(var i = 0; i < Projectiles.length;i++) {
       
-        var Item = SpriteGroup.get(i);
+        var Item = Projectiles.get(i);
       
         if(Item.position.x <= -15 || Item.position.x >= CanvasWidth + 15 || Item.position.y <= -15 || Item.position.y >= CanvasHeight + 15) {
         
