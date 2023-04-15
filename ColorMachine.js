@@ -1,6 +1,3 @@
-// Git
-
-
 // Main Vars:
 
 var CanvasWidth;
