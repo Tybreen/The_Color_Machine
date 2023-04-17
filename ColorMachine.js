@@ -193,6 +193,10 @@ function SetGameStatus(status)
 {
     if(status == "Running")
     {
+        Red = 255;
+        Green = 0;
+        Blue = 0;
+        
         GameStatus = "Running";
         StartText = "Stop";
         InstructionText = false;
