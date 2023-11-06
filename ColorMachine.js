@@ -4,12 +4,13 @@
 --Have projectile speed, adjust, depending on delta time. OR Using new World object in updated p5.
 --Have the option to have a colored outline instead of the whole projectile in one color -- Have the projectile, be translucent to have a colored outline.
 --Adjust/fix Instruction Text.
+- colliders ???
 --Re-organize code:
     -Move { down
     -Lower case vars AND functions
     -Fix groups (Maybe)
     -Fix "_Save" AND "_Sprite"
-    - colliders ???
+    
 */
 
 // Main Vars:
@@ -233,15 +234,14 @@ function CreateButton(side, order, group, Hide=false)
 
         var CurrentButton;
 
-        CurrentButton = new Sprite(Side, offsetBetweenButtons * order, ButtonWidth, ButtonHeight);    
+        CurrentButton = new Sprite(Side, offsetBetweenButtons * order, ButtonWidth, ButtonHeight, "static");    
 
-        CurrentButton.draw = function() {
-
+        CurrentButton.draw = function() 
+        {
             fill(120);
+            noStroke();
             rect(0, 0, ButtonWidth, ButtonHeight, 2);
         }
-
-        CurrentButton.collider = "static";
 
         if(group == 1) settingsButtons.push(CurrentButton);
         else if(group == 2) presetButtons.push(CurrentButton);
@@ -413,7 +413,7 @@ function CreateProjectiles() {
       
         TimeSinceFired = 0;
         
-        CurrentProjectile = new Sprite(Origin.position.x, Origin.position.y , ProjectileLength, ProjectileWidth);
+        CurrentProjectile = new Sprite(Origin.position.x, Origin.position.y, ProjectileWidth, ProjectileLength, "none");
 
         CurrentProjectile.Shape = ProjectileShape;
 
@@ -427,13 +427,12 @@ function CreateProjectiles() {
 
         CurrentProjectile.speed = ProjectileSpeed;
         
-        CurrentProjectile.rotation = (ProjectileDirection - 90);
-
-        CurrentProjectile.collider = "none";
+        CurrentProjectile.rotation = ProjectileDirection;
 
         CurrentProjectile.draw = function() {
 
             fill(this.Color);
+            noStroke();
 
             if(this.Shape == "Square") {
                 rect(0, 0, this.width, this.height);
@@ -444,6 +443,8 @@ function CreateProjectiles() {
             }
 
         }
+        console.log(ProjectileWidth);
+        console.log(ProjectileLength);
         Projectiles.push(CurrentProjectile);
 
     }
@@ -551,11 +552,12 @@ function setup() {
 
     // Origin:
 
-    Origin = new Sprite(OriginX_Pix, OriginY_Pix, 10, 10);
+    Origin = new Sprite(OriginX_Pix, OriginY_Pix, 10, 10, "none");
 
     Origin.draw = function() {
 
         fill(120);
+        noStroke();
 
         if(ProjectileShape == "Square") {
             noStroke();
@@ -567,18 +569,16 @@ function setup() {
             ellipse(0, 0, this.width, this.height);
         }
     }
-
-    Origin.collider = "none";
     
 
     // UI Hide Button:
-    UIHide_Sprite = new Sprite(offsetOffWall, offsetBetweenButtons, ButtonWidth, ButtonHeight);
+    UIHide_Sprite = new Sprite(offsetOffWall, offsetBetweenButtons, ButtonWidth, ButtonHeight, "static");
     //UIHide_Sprite.mouseOver = function() { cursor(HAND) };
     //UIHide_Sprite.mouseOut = function() { cursor(ARROW) };
 
-    UIHide_Sprite.collider = "static";
     UIHide_Sprite.draw = function() {
         fill(120);
+        noStroke();
         rect(0, 0, ButtonWidth, ButtonHeight, 2);
     }
 
@@ -702,8 +702,16 @@ function settingsButtonsControls()
 
     }
 
-    if(ProjectileLength_Sprite.mouse.released()) { ProjectileLength = PromptsForButtons("Projectile Length", ProjectileLength) };
-    if(ProjectileWidth_Sprite.mouse.released()) { ProjectileWidth = PromptsForButtons("Projectile Width", ProjectileWidth) };
+    if(ProjectileLength_Sprite.mouse.released()) { 
+        ProjectileLength = PromptsForButtons("Projectile Length", ProjectileLength);
+        console.log("console.error();") 
+    }
+    if(ProjectileWidth_Sprite.mouse.released()) { 
+        ProjectileWidth = PromptsForButtons("Projectile Width", ProjectileWidth);
+    console.log("console.error();") 
+    }
+    
+
 
     if(ProjectileColorType_Sprite.mouse.released())
     {
@@ -1317,9 +1325,6 @@ function draw() {
         else if(BackgroundColor == "White") background(255, ProjectileTrails);
 
     }*/
-
-
-    console.log(Origin.sleeping);
 
     
     Projectiles.draw();
