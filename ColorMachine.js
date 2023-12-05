@@ -1,10 +1,13 @@
-// Notes:
-/*
---Adjust button sizing to screen.
+//* Notes:
+/* 
+TODO:
+
+--Adjust button sizing to screen.  ? √ ?
 --Have projectile speed, adjust, depending on delta time. OR Using new World object in updated p5.
 --Have the option to have a colored outline instead of the whole projectile in one color -- Have the projectile, be translucent to have a colored outline.
 --Adjust/fix Instruction Text.
-- colliders ???
+--colliders ???
+
 --Re-organize code:
     -Move { down
     -Lower case vars AND functions
@@ -32,7 +35,7 @@ var ButtonWidth = 80; // 80
 var ButtonHeight = 30; // 30
 
 var offsetOffWall = 60; // 60
-var offsetBetweenButtons = 50; // 50
+var offsetBetweenButtons = 30; // 50
 
 
 
@@ -186,14 +189,14 @@ function preload()
 function CreateColorPicker() 
 {
     ColorPicker = createColorPicker(ProjectileColor);
-    ColorPicker.position((offsetOffWall - 5) - (ButtonWidth / 2), offsetBetweenButtons * 8 /* <-- Order of Buttons*/ - (ButtonHeight / 2) -5 );
+    ColorPicker.position((offsetOffWall - 5) - (ButtonWidth / 2), (ButtonHeight * 8) + (offsetBetweenButtons * 8) /* <-- Order of Buttons*/ - (ButtonHeight / 2) - 5 );
     ColorPicker.size(ButtonWidth * (1 + 1/8), ButtonHeight * (1 + 1/3));
     ColorPicker.input(() => { ProjectileColor = ColorPicker.value() });
 }
 
 function DeleteProjectiles()
 {
-    while(Projectiles.length >= 1) Projectiles.get(0).remove();
+    while(Projectiles.length >= 1) Projectiles[0].remove();
 }
 
 function SetGameStatus(status)
@@ -222,7 +225,7 @@ function SetGameStatus(status)
     }
 }
 
-function CreateButton(side, order, group, Hide=false) 
+function CreateButton(side, order, group, Hide=false)
 {
 
     var Side;
@@ -234,7 +237,7 @@ function CreateButton(side, order, group, Hide=false)
 
         var CurrentButton;
 
-        CurrentButton = new Sprite(Side, offsetBetweenButtons * order, ButtonWidth, ButtonHeight, "static");    
+        CurrentButton = new Sprite(Side, (ButtonHeight * order) + (offsetBetweenButtons * order), ButtonWidth, ButtonHeight, "static");
 
         CurrentButton.draw = function() 
         {
@@ -297,10 +300,6 @@ function createMyButtonGroup(group)
         Save2_Sprite = CreateButton(2, 8, 2);
         Load2_Sprite = CreateButton(2, 9, 2);
 
-
-        
-
-        
         createdGroup2 = true;
     }
 }
@@ -309,80 +308,15 @@ function deleteGroup(group)
 {
     if(group == 1)
     {
-        // ProjectileShape_Sprite.remove();
-        // // ProjectileShape_Sprite = null;
-        // ProjectileLength_Sprite.remove();
-        // // ProjectileLength_Sprite = null;
-        // ProjectileWidth_Sprite.remove();
-        // // ProjectileWidth_Sprite = null;
-        // ProjectileColorType_Sprite.remove();
-        // // ProjectileColorType_Sprite = null;
-        // RainbowSpeed_Sprite.remove();
-        // // RainbowSpeed_Sprite = null;
-        
-        // OriginX_Sprite.remove();
-        // // OriginX_Sprite = null;
-        // OriginY_Sprite.remove();
-        // // OriginY_Sprite = null;
-        // RateOfFire_Sprite.remove();
-        // // RateOfFire_Sprite = null;
-        // ProjectileNumber_Sprite.remove();
-        // // ProjectileNumber_Sprite = null;
-        // ProjectileSpeed_Sprite.remove();
-        // // ProjectileSpeed_Sprite = null;
-        // ProjectileDirection_Sprite.remove();
-        // // ProjectileDirection_Sprite = null;
-        // ProjectileSpinSpeed_Sprite.remove();
-        // // ProjectileSpinSpeed_Sprite = null;
-        // ScreenSquare_Sprite.remove();
-        // // ScreenSquare_Sprite = null;
-        // ProjectileCollisionWithWallMode_Sprite.remove();
-        // // ProjectileCollisionWithWallMode_Sprite = null;
-
-        presetButtons.removeAll();
+        settingsButtons.removeAll();
         
         createdGroup1 = false;
     }
 
     if(group == 2)
     {
-        // Preset1_Sprite.remove();
-        // // Preset1_Sprite = null;
-        // Preset2_Sprite.remove();
-        // // Preset2_Sprite = null;
-        // Preset3_Sprite.remove();
-        // // Preset3_Sprite = null;
-        // Preset4_Sprite.remove();
-        // // Preset4_Sprite = null;
-        // Preset5_Sprite.remove();
-        // // Preset5_Sprite = null;
-        // Preset6_Sprite.remove();
-        // // Preset6_Sprite = null;
-        // Preset7_Sprite.remove();
-        // // Preset7_Sprite = null;
-        // Preset8_Sprite.remove();
-        // // Preset8_Sprite = null;
-        // Preset9_Sprite.remove();
-        // // Preset9_Sprite = null;
-        // Preset10_Sprite.remove();
-        // // Preset10_Sprite = null;
-        // Preset11_Sprite.remove();
-        // // Preset11_Sprite = null;
-        // Preset12_Sprite.remove();
-        // // Preset12_Sprite = null;
-
-        // Save1_Sprite.remove();
-        // // Save1_Sprite = null;
-        // Load1_Sprite.remove();
-        // // Load1_Sprite = null;
-        // Save2_Sprite.remove();
-        // // Save2_Sprite = null;
-        // Load2_Sprite.remove();
-        // // Load2_Sprite = null;
-
         presetButtons.removeAll();
         
-
         createdGroup2 = false;
     }
 }
@@ -394,11 +328,11 @@ function CreateText(Name, Status, side, order) {
     if(side == 1) Side = offsetOffWall;
     else if(side == 2) Side = width - offsetOffWall;
 
-    text(Name, Side, offsetBetweenButtons * order - 16);
+    text(Name, Side, (ButtonHeight * order) + (offsetBetweenButtons * order) - (ButtonHeight / 30 * 16));
 
-    textSize(15);
+    textSize( Math.floor(ButtonHeight / 2) );
 
-    text(Status, Side, offsetBetweenButtons * order + 5);
+    text(Status, Side, (ButtonHeight * order) + (offsetBetweenButtons * order) + (ButtonHeight / 30 * 5));
 
 }
 
@@ -410,10 +344,15 @@ function CreateProjectiles() {
     TimeSinceFired += deltaTime / 1000;
     
     if(GameStatus == "Running" && TimeSinceFired >= 1 / RateOfFire && (ProjectileNumber > Projectiles.length || ProjectileNumber == Infinity)) {
-      
-        TimeSinceFired = 0;
         
-        CurrentProjectile = new Sprite(Origin.position.x, Origin.position.y, ProjectileWidth, ProjectileLength, "none");
+        TimeSinceFired = 0;
+
+        CurrentProjectile = new Sprite();
+        CurrentProjectile.x = Origin.position.x;
+        CurrentProjectile.y = Origin.position.y;
+        CurrentProjectile.width = ProjectileWidth;
+        CurrentProjectile.height = ProjectileLength;
+        CurrentProjectile.collider = "none";
 
         CurrentProjectile.Shape = ProjectileShape;
 
@@ -428,13 +367,21 @@ function CreateProjectiles() {
         CurrentProjectile.speed = ProjectileSpeed;
         
         CurrentProjectile.rotation = ProjectileDirection;
-
+ 
         CurrentProjectile.draw = function() {
+            // TODO:
 
-            fill(this.Color);
-            noStroke();
+            /* if(TBD): */ fill(this.Color);
+            /* else:
+            {
+                fill(0, 0);
+                stroke(this.Color);
+            } */
+            strokeWeight(0); // TBD
+            
 
-            if(this.Shape == "Square") {
+            if(this.Shape == "Square")
+            {
                 rect(0, 0, this.width, this.height);
             }
 
@@ -443,8 +390,7 @@ function CreateProjectiles() {
             }
 
         }
-        console.log(ProjectileWidth);
-        console.log(ProjectileLength);
+        
         Projectiles.push(CurrentProjectile);
 
     }
@@ -528,13 +474,17 @@ function setup() {
     if(window.matchMedia('(prefers-color-scheme: dark)').matches) BackgroundColor = "Black";
     else BackgroundColor = "White";
 
-    textSize(10);
-
     OriginX_Pix = width / 2;
     OriginY_Pix = height / 2; 
 
-    //console.log(width);//////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+    ButtonHeight = (3 * height) / 80;
+    ButtonWidth = (8 * ButtonHeight) / 3;
+
+    console.log("W  " + width);
+    console.log("H  " + height);
+
+    console.log(this.Sprite.shapeTypes);
+
     Projectiles = new Group();
     //Trails = new Group();
     standardButtons = new Group();
@@ -572,7 +522,7 @@ function setup() {
     
 
     // UI Hide Button:
-    UIHide_Sprite = new Sprite(offsetOffWall, offsetBetweenButtons, ButtonWidth, ButtonHeight, "static");
+    UIHide_Sprite = new Sprite(offsetOffWall, offsetBetweenButtons + ButtonHeight, ButtonWidth, ButtonHeight, "static");
     //UIHide_Sprite.mouseOver = function() { cursor(HAND) };
     //UIHide_Sprite.mouseOut = function() { cursor(ARROW) };
 
@@ -704,11 +654,11 @@ function settingsButtonsControls()
 
     if(ProjectileLength_Sprite.mouse.released()) { 
         ProjectileLength = PromptsForButtons("Projectile Length", ProjectileLength);
-        console.log("console.error();") 
+        console.log("L:" +ProjectileLength);
     }
     if(ProjectileWidth_Sprite.mouse.released()) { 
         ProjectileWidth = PromptsForButtons("Projectile Width", ProjectileWidth);
-    console.log("console.error();") 
+        console.log("W:" + ProjectileWidth);
     }
     
 
@@ -770,6 +720,8 @@ function presetButtonsControls()
         ChangeOriginPosition();
         DeleteProjectiles();
         SetGameStatus("Running");
+
+        console.log("hi36253");
     }
 
     if(Preset2_Sprite.mouse.released())
@@ -1151,7 +1103,7 @@ function OriginSpinSpeedProcessing() {
 function ChangeMouseStatus(sprite, CheckUIHide)
 {
     //console.log(sprite.mouse.hovers())
-    if(sprite.mouse.hovers()) mouseMode = "HAND";
+    if(sprite.mouse.hovering()) mouseMode = "HAND";
     else if(sprite.mouse.hovered()) mouseMode = "ARROW";
     
     if(mouseMode == "HAND")
@@ -1167,8 +1119,9 @@ function ChangeMouseStatusForButtons(group)
 {
     for(s in group)
     {
-        //console.log(settingsButtons);
-        ChangeMouseStatus(s, true);
+        console.log("file: ColorMachine.js:1115 ~ s:", s);
+        
+        ChangeMouseStatus(group[s], true); // TODO /////////////////////////////////////////////////////////////////////////
     }
 }
 
@@ -1222,24 +1175,28 @@ function Bounce()
         if(s.position.x < offsetX_SS) {
           s.position.x = offsetX_SS;
           s.velocity.x = abs(s.velocity.x);
+          Projectiles[i].rotation = s.direction - 90;
         }
     
         if(s.position.x > width - offsetX_SS) {
           s.position.x = width - offsetX_SS;
           s.velocity.x = -abs(s.velocity.x);
+          Projectiles[i].rotation = s.direction - 90;
         }
     
         if(s.position.y < offsetY_SS) {
           s.position.y = offsetY_SS;
           s.velocity.y = abs(s.velocity.y);
+          Projectiles[i].rotation = s.direction - 90;
         }
     
         if(s.position.y > height - offsetY_SS) {
           s.position.y = height - offsetY_SS;
           s.velocity.y = -abs(s.velocity.y);
+          Projectiles[i].rotation = s.direction - 90;
         }
 
-        Projectiles[i].rotation = s.getDirection();
+        
     }
 
 }
@@ -1281,7 +1238,7 @@ function Cleaner() {
     
     for(var i = 0; i < Projectiles.length;i++) {
         
-        var Item = Projectiles.get(i);
+        var Item = Projectiles[i];
       
         if(Item.position.x <= offsetX_SS - (ProjectileLength / 2) || Item.position.x >= (width - offsetX_SS) + (ProjectileLength / 2) || Item.position.y <= offsetY_SS - (ProjectileLength / 2) || Item.position.y >= (height - offsetY_SS) + (ProjectileLength / 2)) {
         
@@ -1341,6 +1298,10 @@ function draw() {
     ChangeMouseStatus(OpenPresets_Sprite, true);
     ChangeMouseStatus(Start_Sprite, true);
 
+    //console.log("file: ColorMachine.js:1296 ~ draw ~ settingsButtons:", settingsButtons);
+
+    // TODO:
+
     //ChangeMouseStatusForButtons(settingsButtons);
     //ChangeMouseStatusForButtons(presetButtons);
     
@@ -1367,7 +1328,7 @@ function draw() {
     if(BackgroundColor == "Black") fill("White");
     else if(BackgroundColor == "White") fill("Black");
 
-    textSize(15);
+    textSize( Math.floor(ButtonHeight / 2) );
 
     if(UIHide) CreateText("UI", "Show", 1, 1);
 
@@ -1406,43 +1367,43 @@ function draw() {
         
             // Left Texts:
 
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2.6) );
             CreateText("Projectile Shape", ProjectileShape, 1, 4);
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2.6) );
             CreateText("Projectile Length", ProjectileLength, 1, 5);
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2.6) );
             CreateText("Projectile Width", ProjectileWidth, 1, 6);
-            textSize(8);
+            textSize( Math.floor(ButtonHeight / 3.3) );
             CreateText("Projectile Color Type", ProjectileColorType, 1, 7);
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2.5) );
             CreateText("Projectile Color", "", 1, 8);
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2.6) );
             CreateText("Rainbow Speed", RainbowSpeed, 1, 9);
 
         
             //console.log( (offsetBetweenButtons - ButtonWidth) / 2 * (11/10) );
             // Right Texts:
 
-            textSize( (offsetBetweenButtons - ButtonWidth) / 2 * (11/10) ); // 11
+            textSize( Math.floor(ButtonHeight / 2) );
             CreateText("Origin X", OriginX_Per + "%", 2, 1);
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2) );
             CreateText("Origin Y", OriginY_Per + "%", 2, 2);
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2) );
             CreateText("Rate of Fire", RateOfFire + " per Sec", 2, 3);
-            textSize(8);
+            textSize( Math.floor(ButtonHeight / 3.5) );
             CreateText("Number of Projectiles", ProjectileNumber, 2, 4);
-            textSize(10);
+            textSize( Math.floor(ButtonHeight / 2.7) );
             CreateText("Projectile Speed", ProjectileSpeed, 2, 5);
-            textSize(10);
+            textSize( Math.floor(ButtonHeight / 2.6) );
             CreateText("Origin Direction", Math.floor(ProjectileDirection), 2, 6);
-            textSize(9);
+            textSize( Math.floor(ButtonHeight / 3) );
             CreateText("Origin Spin Speed", ProjectileSpinSpeed, 2, 7);
-            textSize(11);
+            textSize( Math.floor(ButtonHeight / 2.5) );
             CreateText("Square Screen", ScreenSquare, 2, 8);
-            textSize(9);
+            textSize( Math.floor(ButtonHeight / 3) );
             CreateText("With Wall Mode", ProjectileCollisionWithWallMode, 2, 9);
-            textSize(9);
-            text("Projectile Collision", width - offsetOffWall, offsetBetweenButtons * 9/* <-- Order of Buttons*/ - 26);
+            textSize( Math.floor(ButtonHeight / 3) );
+            text("Projectile Collision", width - offsetOffWall, (ButtonHeight * 9) + (offsetBetweenButtons * 9) /* <-- Order of Buttons*/ - (ButtonHeight * 17/20));
             
         }
         
@@ -1497,7 +1458,7 @@ function draw() {
 
         }
 
-        textSize(10);
+        textSize( Math.floor(ButtonHeight / 3) );
         if(BackgroundColor == "Black") CreateText("Background Color","Black", 1, 2);
         else if(BackgroundColor == "White") CreateText("Background Color", "White", 1, 2);
 
@@ -1506,7 +1467,7 @@ function draw() {
 
         CreateText("Presets", o, 1, 3);
 
-        textSize(12);
+        textSize( Math.floor(ButtonHeight / 2.5) );
         CreateText(Projectiles.length + " Projectiles", StartText, 2, 10);
 
 
@@ -1517,10 +1478,10 @@ function draw() {
 
 /*
 
-//Credits:
+*Credits:
 
 /Thank you Mom for helping me push through.
 
-/Thank you Codey for the help.
+/Thank you Codey and Riley for the help.
 
 */
