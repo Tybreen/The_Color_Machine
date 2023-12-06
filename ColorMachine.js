@@ -2,12 +2,13 @@
 /* 
 TODO:
 
---Adjust button sizing to screen.  ? √ ?
+--Adjust button sizing to screen.  ? √ ?  I have to test on a phone... Waiting for release.
 --Have projectile speed, adjust, depending on delta time. OR Using new World object in updated p5.
 --Adjust/fix Instruction Text.
 --Colliders ???
 --Pause feature.
 --Split into files.
+--Color picker hand cursor is not working right.
 
 --Re-organize code:
     -Lower case vars AND functions
@@ -30,6 +31,7 @@ var mouseMode = "ARROW";
 var UIGroup = 1;
 var createdGroup1 = false;
 var createdGroup2 = false;
+var createdGroup0 = false;
 
 var ButtonWidth = 80; // 80
 var ButtonHeight = 30; // 30
@@ -284,7 +286,7 @@ function createMyButtonGroup(group)
         createdGroup1 = true;
     }
 
-    if(group == 2)
+    else if(group == 2)
     {
         Preset1_Sprite = CreateButton(1, 4, 2);
         Preset2_Sprite = CreateButton(1, 5, 2);
@@ -307,6 +309,15 @@ function createMyButtonGroup(group)
 
         createdGroup2 = true;
     }
+    else if(group == 0)
+    {
+        BackgroundColor_Sprite = CreateButton(1, 2, 0);
+        OpenPresets_Sprite = CreateButton(1, 3, 0);
+        Start_Sprite = CreateButton(2, 10, 0);
+
+        createdGroup0 = true;
+    }
+
 }
 
 function deleteGroup(group)
@@ -318,11 +329,18 @@ function deleteGroup(group)
         createdGroup1 = false;
     }
 
-    if(group == 2)
+    else if(group == 2)
     {
         presetButtons.removeAll();
         
         createdGroup2 = false;
+    }
+
+    else if(group == 0)
+    {
+        standardButtons.removeAll();
+        
+        createdGroup0 = false;
     }
 }
 
@@ -532,18 +550,7 @@ function setup()
         noStroke();
         rect(0, 0, ButtonWidth, ButtonHeight, 2);
     }
-
-    BackgroundColor_Sprite = CreateButton(1, 2, 0);
-
-    // OpenPreset Button:
-    
-    OpenPresets_Sprite = CreateButton(1, 3, 0);
-
-    // Start Button:
-
-    Start_Sprite = CreateButton(2, 10, 0);
-
-
+    createMyButtonGroup(0);
     createMyButtonGroup(1);
 
 }
@@ -589,12 +596,6 @@ function standardButtonsControls()
             DeleteProjectiles();
         }
 
-    }
-
-    if(UIHide_Sprite.mouse.released())
-    {
-        if(UIHide) UIHide = false;
-        else if(!UIHide) UIHide = true;
     }
 }
 
@@ -706,8 +707,6 @@ function settingsButtonsControls()
     if(ProjectileSpinSpeed_Sprite.mouse.released()) { ProjectileSpinSpeed = PromptsForButtons("Origin Spin Speed   + OR -", ProjectileSpinSpeed) };
     
 }
-
-// TODO:
 
 function presetButtonsControls()
 {
@@ -1152,28 +1151,30 @@ function OriginSpinSpeedProcessing()
 
 }
 
-function ChangeMouseStatus(sprite, CheckUIHide)
+
+
+
+function ChangeMouseStatus()
 {
-    //console.log(sprite.mouse.hovers())
-    if(sprite.mouse.hovering()) mouseMode = "HAND";
-    else if(sprite.mouse.hovered()) mouseMode = "ARROW";
-    
     if(mouseMode == "HAND")
     {
-        if(CheckUIHide && !UIHide) cursor(HAND);
-        else cursor(HAND);
+        /*if(CheckUIHide && !UIHide)*/ cursor(HAND);
+        /*else cursor(HAND);*/
     }
-
     else if(mouseMode == "ARROW") cursor(ARROW);
+}
+
+function ChangeMouseStatusForButton(sprite)
+{
+    if(sprite.mouse.hovering()) mouseMode = "HAND";
+    else if(sprite.mouse.hovered()) mouseMode = "ARROW";
 }
 
 function ChangeMouseStatusForButtons(group)
 {
-    for(s in group)
-    {
-        console.log("file: ColorMachine.js:1115 ~ s:", s);
-        
-        ChangeMouseStatus(group[s], true); // TODO /////////////////////////////////////////////////////////////////////////
+    for(var i = 0; i < group.length; i++)
+    {        
+        ChangeMouseStatusForButton(group[i]);
     }
 }
 
@@ -1322,8 +1323,7 @@ function draw()
 
     if(GameStatus == "Idle" && Projectiles.length == 0) SetGameStatus("Stopped");
 
-
-    standardButtonsControls();
+    if(createdGroup0) standardButtonsControls();
     if(createdGroup1) settingsButtonsControls();
     if(createdGroup2) presetButtonsControls();
 
@@ -1350,17 +1350,33 @@ function draw()
 
     CreateProjectiles();
 
-    ChangeMouseStatus(UIHide_Sprite, false);
-    ChangeMouseStatus(BackgroundColor_Sprite, true);
-    ChangeMouseStatus(OpenPresets_Sprite, true);
-    ChangeMouseStatus(Start_Sprite, true);
+    ChangeMouseStatusForButton(UIHide_Sprite);
+    ChangeMouseStatusForButton(BackgroundColor_Sprite);
+    ChangeMouseStatusForButton(OpenPresets_Sprite);
+    ChangeMouseStatusForButton(Start_Sprite);
 
-    //console.log("file: ColorMachine.js:1296 ~ draw ~ settingsButtons:", settingsButtons);
+    ChangeMouseStatusForButtons(settingsButtons);
+    ChangeMouseStatusForButtons(presetButtons);
 
-    // TODO:
+    ChangeMouseStatus();
 
-    //ChangeMouseStatusForButtons(settingsButtons);
-    //ChangeMouseStatusForButtons(presetButtons);
+    if(ColorPicker != null)
+    {
+        //console.log("file: ColorMachine.js:1374 ~ mouseMode:", mouseMode);
+
+        ColorPicker.mouseOver(() => 
+        {
+            mouseMode = "HAND";
+            //console.log("enter");
+        });
+
+        ColorPicker.mouseOut(() => 
+        {
+            mouseMode = "ARROW";
+            //console.log("exit");
+        });
+        
+    }
     
     //if(ProjectileTrails != 0) CreateTrails();
 
@@ -1387,7 +1403,6 @@ function draw()
     else if(BackgroundColor == "White") fill("Black");
 
     textSize( Math.floor(ButtonHeight / 2) );
-
     if(UIHide) CreateText("UI", "Show", 1, 1);
 
     else if(!UIHide) CreateText("UI", "Hide", 1, 1);
@@ -1401,7 +1416,23 @@ function draw()
         ColorPicker = null;
     }
 
-    
+    if(UIHide_Sprite.mouse.released())
+    {
+        if(UIHide)
+        {
+            UIHide = false;
+            createMyButtonGroup(0);
+        }
+
+        else if(!UIHide) UIHide = true;
+    }
+
+    if(UIHide)
+    {   
+        if(createdGroup1) deleteGroup(1);
+        if(createdGroup2) deleteGroup(2);
+        if(createdGroup0) deleteGroup(0);
+    }
 
 
     if(!UIHide)
@@ -1439,8 +1470,7 @@ function draw()
             textSize( Math.floor(ButtonHeight / 2.8) );
             CreateText("Projectile Outline", ProjectileOutline, 1, 10);
 
-        
-            //console.log( (offsetBetweenButtons - ButtonWidth) / 2 * (11/10) );
+
             // Right Texts:
 
             textSize( Math.floor(ButtonHeight / 2) );
