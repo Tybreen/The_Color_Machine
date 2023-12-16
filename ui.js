@@ -1,5 +1,7 @@
 //# Anything functions relating to the UI.
 
+
+
 //* Color Picker:
 
 function CreateColorPicker()
@@ -8,6 +10,20 @@ function CreateColorPicker()
     ColorPicker.position((offsetOffWall - 5) - (ButtonWidth / 2), (ButtonHeight * 8) + (offsetBetweenButtons * 8) /* <-- Order of Buttons*/ - (ButtonHeight / 2) - 5 );
     ColorPicker.size(ButtonWidth * (1 + 1/8), ButtonHeight * (1 + 1/3));
     ColorPicker.input(() => { ProjectileColor = ColorPicker.value() });
+
+    //console.log("file: ColorMachine.js:1374 ~ mouseMode:", mouseMode);
+
+    ColorPicker.mouseOver(() => 
+    {
+        mouseMode = "HAND";
+        console.log("enter");
+    });
+
+    ColorPicker.mouseOut(() => 
+    {
+        mouseMode = "ARROW";
+        console.log("exit");
+    });
 }
 
 //* Creation/Deletion of Buttons

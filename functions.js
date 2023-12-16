@@ -139,18 +139,16 @@ function Loop() {
 }
 
 
-function Cleaner() {
+function Cleaner()
+{
   ScreenSquareManager();
 
-  for (var i = 0; i < Projectiles.length; i++) {
+  for (var i = 0; i < Projectiles.length; i++)
+  {
     var Item = Projectiles[i];
 
-    if (
-      Item.position.x <= offsetX_SS - ProjectileLength / 2 ||
-      Item.position.x >= width - offsetX_SS + ProjectileLength / 2 ||
-      Item.position.y <= offsetY_SS - ProjectileLength / 2 ||
-      Item.position.y >= height - offsetY_SS + ProjectileLength / 2
-    ) {
+    if (Item.position.x <= offsetX_SS - ProjectileLength / 2 || Item.position.x >= width - offsetX_SS + ProjectileLength / 2 || Item.position.y <= offsetY_SS - ProjectileLength / 2 || Item.position.y >= height - offsetY_SS + ProjectileLength / 2)
+    {
       Item.remove();
       i--;
     }
@@ -158,20 +156,25 @@ function Cleaner() {
 }
 
 
-function ChangeMouseStatus() {
+function ChangeMouseStatus()
+{
   if (mouseMode == "HAND") cursor(HAND);
   else if (mouseMode == "ARROW") cursor(ARROW);
 }
 
 
-function ChangeMouseStatusForButton(sprite) {
+function ChangeMouseStatusForButton(sprite)
+{
   if (sprite.mouse.hovering()) mouseMode = "HAND";
-  else if (sprite.mouse.hovered()) mouseMode = "ARROW";
+  if (sprite.mouse.hovered()) mouseMode = "ARROW";
+
 }
 
 
-function ChangeMouseStatusForButtons(group) {
-  for (var i = 0; i < group.length; i++) {
+function ChangeMouseStatusForButtons(group)
+{
+  for (var i = 0; i < group.length; i++)
+  {
     ChangeMouseStatusForButton(group[i]);
   }
 }

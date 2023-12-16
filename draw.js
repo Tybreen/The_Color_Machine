@@ -1,6 +1,6 @@
 //# The draw function. It runs every frame.
 
-function draw() 
+function draw()
 {
 
     if(BackgroundColor == "Black") background(0);
@@ -49,25 +49,7 @@ function draw()
     ChangeMouseStatusForButtons(settingsButtons);
     ChangeMouseStatusForButtons(presetButtons);
 
-    ChangeMouseStatus();
-
-    if(ColorPicker != null)
-    {
-        //console.log("file: ColorMachine.js:1374 ~ mouseMode:", mouseMode);
-
-        ColorPicker.mouseOver(() => 
-        {
-            mouseMode = "HAND";
-            //console.log("enter");
-        });
-
-        ColorPicker.mouseOut(() => 
-        {
-            mouseMode = "ARROW";
-            //console.log("exit");
-        });
-        
-    }
+    ChangeMouseStatus(); // TODO
     
     //if(ProjectileTrails != 0) CreateTrails();
 

@@ -2,18 +2,19 @@
 # Notes:
 
 *--General:
-    --Adjust button sizing to screen.  ? √ ?  I have to test on a phone... Waiting for release.
+    --Adjust button sizing to screen.  ? √ ?  (I have to test on a phone... Waiting for release)
     --Have projectile speed, adjust, depending on delta time. OR Using new World object in updated p5.
     --Adjust/fix Instruction Text.
-    --Colliders ???
-    --Pause feature.
-    --Split into files.
     --Color picker hand cursor is not working right.
 
+*--Features:
+    --Pause feature.
+    --Colliders ???
+
 *--Re-organize code:
-    -Lower case vars AND functions
-    -Fix groups (Maybe)
-    -Fix "_Save" AND "_Sprite"
+    -Lower case vars AND functions.
+    -Fix groups. (Maybe (WHAT???) ) 
+    -Fix "_Save" AND "_Sprite".
     
 */
 
