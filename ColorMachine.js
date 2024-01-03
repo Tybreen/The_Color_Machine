@@ -21,6 +21,8 @@
 
 */
 
+console.log("Date last updated: 1-3-24");
+
 //* Main Vars:
 
 var GameStatus = "Stopped";
