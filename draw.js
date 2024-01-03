@@ -49,7 +49,7 @@ function draw()
     ChangeMouseStatusForButtons(settingsButtons);
     ChangeMouseStatusForButtons(presetButtons);
 
-    ChangeMouseStatus(); // TODO
+    ChangeMouseStatus();
     
     //if(ProjectileTrails != 0) CreateTrails();
 
@@ -173,7 +173,7 @@ function draw()
 
         else if(UIGroup == 2)
         {
-            if(createdGroup1) 
+            if(!createdGroup2)
             {
                 deleteButtonGroup(1);
                 createMyButtonGroup(2);
@@ -193,7 +193,7 @@ function draw()
             CreateText("Preset 9", "Click", 2, 2);
             CreateText("Preset 10", "Click", 2, 3);
             CreateText("Preset 11", "Click", 2, 4);
-            CreateText("Preset ???", "Click", 2, 5);
+            CreateText("Preset 12", "Click", 2, 5);
 
 
             if(BackgroundColor_Save_1 == null)

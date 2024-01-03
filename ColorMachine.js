@@ -3,17 +3,16 @@
 
 *--General:
     --Adjust button sizing to screen.  ? √ ?  (I have to test on a phone... Waiting for release)
-    --Have projectile speed, adjust, depending on delta time. OR Using new World object in updated p5.
-    --Adjust/fix Instruction Text.
-    --Color picker hand cursor is not working right.
+    // --Have projectile speed, adjust, depending on delta time. OR Using new World object in updated p5.
+    //--Color picker hand cursor is not working right.
 
 *--Features:
-    --Pause feature.
-    --Colliders ???
+    //--Pause feature.
+    //--Colliders ???
 
 *--Re-organize code:
     -Lower case vars AND functions.
-    -Fix groups. (Maybe (WHAT???) ) 
+    -Fix groups. (Maybe (WHAT???) )
     -Fix "_Save" AND "_Sprite".
     
 */
@@ -37,7 +36,7 @@ var ButtonWidth = 80; // 80
 var ButtonHeight = 30; // 30
 
 var offsetOffWall = 60; // 60
-var offsetBetweenButtons = 30; // 50
+var offsetBetweenButtons = 30; // 30
 
 var ColorPicker;
 

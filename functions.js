@@ -25,16 +25,16 @@ function SetGameStatus(status)
     }
 }
   
-  /*
-  function deltaTimeProjectileSpeedChange()
-  {
-      for(i in Projectiles)
-      {
-          i.setSpeed(i.getSpeed() * (deltaTime * 60));
-          if(Projectiles[0]); //console.log(Projectiles[0].getSpeed());
-      }
-  }
-  */
+/*
+function deltaTimeProjectileSpeedChange()
+{
+    for(i in Projectiles)
+    {
+        i.setSpeed(i.getSpeed() * (deltaTime * 60));
+        if(Projectiles[0]); //console.log(Projectiles[0].getSpeed());
+    }
+}
+*/
   
 function ChangeOriginPosition()
 {
@@ -137,7 +137,7 @@ function Bounce()
     }
 }
   
-  
+
 function Loop() {
     ScreenSquareManager();
   

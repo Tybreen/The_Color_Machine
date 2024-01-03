@@ -19,16 +19,19 @@ function setup()
     ButtonHeight = (3 * height) / 80;
     ButtonWidth = (8 * ButtonHeight) / 3;
 
+    offsetOffWall = ButtonHeight * 2;
+    offsetBetweenButtons = ButtonHeight;
+
     Projectiles = new Group();
     //Trails = new Group();
     standardButtons = new Group();
     settingsButtons = new Group();
     presetButtons = new Group();
 
-    this.Text = createDiv("The Color Machine!<br/><br/>This is a Game about Creativity. There is NO Goal to the Game. You can adjust the Settings on the Right and Left to make any Pattern you'd like! There are already premade Presets on the Left If you Click them and hit Start they will show you a Few Examples.<br/><br/>When you're Ready to Run your Project just hit START.");
-    this.Text.style('font-size', "20px");
+    this.Text = createDiv("The Color Machine!<br/><br/>This is a Game about Creativity. There is NO Goal to the Game. You can adjust the Settings on the Right and Left to make any Pattern you'd like! There are already premade Presets. If you Click them they will show you a Few Examples. Just click the Preset Menu button and choose a present.<br/><br/>When you're Ready to Run your Project just hit START.<br/><br/>Please be careful if you have photosensitivity, especially with preset 12.");
+    this.Text.style('font-size', String(ButtonHeight * 2/3) + "px");
     this.Text.style("text-align", "center");
-    this.Text.style("margin", "125px");
+    this.Text.style("margin", "150px 250px");
     if(BackgroundColor == "Black") this.Text.style("color", "White");
     else this.Text.style("color", "Black");
     this.Text.position(0, -50);
