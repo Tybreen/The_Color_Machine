@@ -17,7 +17,7 @@
   
     
 *--Notes:
-    -Disabled the logo for p5play.
+    -Disabled the logo/playIntro() for p5play.
 
 */
 

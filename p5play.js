@@ -7047,7 +7047,7 @@ p5.prototype.registerMethod('init', function p5playInit() {
 				) {
 					break;
 				}
-				this.p5play.playIntro();
+				//this.p5play.playIntro();
 		}
 	}
 
