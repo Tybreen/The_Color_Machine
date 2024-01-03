@@ -14,7 +14,11 @@
     -Lower case vars AND functions.
     -Fix groups. (Maybe (WHAT???) )
     -Fix "_Save" AND "_Sprite".
+  
     
+*--Notes:
+    -Disabled the logo for p5play.
+
 */
 
 //* Main Vars:
