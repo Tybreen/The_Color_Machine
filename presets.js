@@ -4,404 +4,405 @@ function presetButtonsControls()
 {
     //* Presets:
 
-    if(Preset1_Sprite.mouse.released())
+    if(preset1_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Square";
-        ProjectileLength = 30;
-        ProjectileWidth = 10;
-        ProjectileColorType = "Color";
-        ProjectileColor = "Cyan";
-        RainbowSpeed = 0;
-        ProjectileOutline = 0;
-        ProjectileNumber = Infinity;
-        RateOfFire = 3;
-        ProjectileSpeed = 3;
-        ProjectileDirection = 30;
-        ProjectileSpinSpeed = 0;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "None";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 30;
+        projectileWidth = 10;
+        projectileColorType = "Color";
+        projectileColor = "Cyan";
+        rainbowSpeed = 0;
+        projectileOutline = 0;
+        projectileNumber = Infinity;
+        rateOfFire = 3;
+        projectileSpeed = 3;
+        projectileDirection = 30;
+        projectileSpinSpeed = 0;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "None";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
 
     }
 
-    if(Preset2_Sprite.mouse.released())
+    if(preset2_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 75;
-        OriginY_Per = 80;
-        ProjectileShape = "Circle";
-        ProjectileLength = 20;
-        ProjectileWidth = 50;
-        ProjectileColorType = "Random";
-        ProjectileColor = 120;
-        RainbowSpeed = 0;
-        ProjectileOutline = 0;
-        ProjectileNumber = 50;
-        RateOfFire = 10;
-        ProjectileSpeed = 8;
-        ProjectileDirection = 200;
-        ProjectileSpinSpeed = 0;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "Bounce";
+        backgroundColor = "Black";
+        originX_Per = 75;
+        originY_Per = 80;
+        projectileShape = "Circle";
+        projectileLength = 20;
+        projectileWidth = 50;
+        projectileColorType = "Random";
+        projectileColor = 120;
+        rainbowSpeed = 0;
+        projectileOutline = 0;
+        projectileNumber = 50;
+        rateOfFire = 10;
+        projectileSpeed = 8;
+        projectileDirection = 200;
+        projectileSpinSpeed = 0;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "Bounce";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset3_Sprite.mouse.released())
+    if(preset3_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Square";
-        ProjectileLength = 50;
-        ProjectileWidth = 10;
-        ProjectileColorType = "Rainbow";
-        ProjectileColor = 120;
-        RainbowSpeed = 10;
-        ProjectileOutline = 0;
-        ProjectileNumber = 175;
-        RateOfFire = 100;
-        ProjectileSpeed = 55;
-        ProjectileDirection = 246;
-        ProjectileSpinSpeed = 0;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "Loop";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 50;
+        projectileWidth = 10;
+        projectileColorType = "Rainbow";
+        projectileColor = 120;
+        rainbowSpeed = 10;
+        projectileOutline = 0;
+        projectileNumber = 175;
+        rateOfFire = 100;
+        projectileSpeed = 55;
+        projectileDirection = 246;
+        projectileSpinSpeed = 0;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "Loop";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset4_Sprite.mouse.released())
+    if(preset4_Sprite.mouse.released())
     {
-        BackgroundColor = "White";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Circle";
-        ProjectileLength = 45;
-        ProjectileWidth = 15;
-        ProjectileColorType = "Color";
-        ProjectileColor = "Black";
-        RainbowSpeed = 0;
-        ProjectileOutline = 2;
-        ProjectileNumber = 25;
-        RateOfFire = 10;
-        ProjectileSpeed = 3;
-        ProjectileDirection = 0;
-        ProjectileSpinSpeed = 50;
-        ScreenSquare = "True";
-        ProjectileCollisionWithWallMode = "Bounce";
+        backgroundColor = "White";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Circle";
+        projectileLength = 45;
+        projectileWidth = 15;
+        projectileColorType = "Color";
+        projectileColor = "Black";
+        rainbowSpeed = 0;
+        projectileOutline = 2;
+        projectileNumber = 25;
+        rateOfFire = 10;
+        projectileSpeed = 3;
+        projectileDirection = 0;
+        projectileSpinSpeed = 50;
+        screenSquare = "True";
+        projectileCollisionWithWallMode = "Bounce";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset5_Sprite.mouse.released())
+    if(preset5_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Circle";
-        ProjectileLength = .2;
-        ProjectileWidth = 300;
-        ProjectileColorType = "Rainbow";
-        ProjectileColor = 120;
-        RainbowSpeed = 30;
-        ProjectileOutline = 0;
-        ProjectileNumber = 100;
-        RateOfFire = 100;
-        ProjectileSpeed = 150;
-        ProjectileDirection = 2;
-        ProjectileSpinSpeed = 0;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "Bounce";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Circle";
+        projectileLength = .2;
+        projectileWidth = 300;
+        projectileColorType = "Rainbow";
+        projectileColor = 120;
+        rainbowSpeed = 30;
+        projectileOutline = 0;
+        projectileNumber = 100;
+        rateOfFire = 100;
+        projectileSpeed = 150;
+        projectileDirection = 2;
+        projectileSpinSpeed = 0;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "Bounce";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset6_Sprite.mouse.released())
+    if(preset6_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Square";
-        ProjectileLength = 100;
-        ProjectileWidth = 25;
-        ProjectileColorType = "Rainbow";
-        ProjectileColor = 120;
-        RainbowSpeed = 15;
-        ProjectileOutline = 1;
-        ProjectileNumber = Infinity;
-        RateOfFire = 100;
-        ProjectileSpeed = 2;
-        ProjectileDirection = 0;
-        ProjectileSpinSpeed = 605;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "None";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 100;
+        projectileWidth = 25;
+        projectileColorType = "Rainbow";
+        projectileColor = 120;
+        rainbowSpeed = 15;
+        projectileOutline = 1;
+        projectileNumber = Infinity;
+        rateOfFire = 100;
+        projectileSpeed = 2;
+        projectileDirection = 0;
+        projectileSpinSpeed = 605;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "None";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset7_Sprite.mouse.released())
+    if(preset7_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 0;
-        OriginY_Per = 0;
-        ProjectileShape = "Square";
-        ProjectileLength = 30;
-        ProjectileWidth = 60;
-        ProjectileColorType = "Rainbow";
-        ProjectileColor = 120;
-        RainbowSpeed = 10;
-        ProjectileOutline = 0;
-        ProjectileNumber = 100;
-        RateOfFire = 100;
-        ProjectileSpeed = 1;
-        ProjectileDirection = 0;
-        ProjectileSpinSpeed = 100;
-        ScreenSquare = "True";
-        ProjectileCollisionWithWallMode = "Loop";
+        backgroundColor = "Black";
+        originX_Per = 0;
+        originY_Per = 0;
+        projectileShape = "Square";
+        projectileLength = 30;
+        projectileWidth = 60;
+        projectileColorType = "Rainbow";
+        projectileColor = 120;
+        rainbowSpeed = 10;
+        projectileOutline = 0;
+        projectileNumber = 100;
+        rateOfFire = 100;
+        projectileSpeed = 1;
+        projectileDirection = 0;
+        projectileSpinSpeed = 100;
+        screenSquare = "True";
+        projectileCollisionWithWallMode = "Loop";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset8_Sprite.mouse.released())
+    if(preset8_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 100;
-        ProjectileShape = "Circle";
-        ProjectileLength = 50;
-        ProjectileWidth = 25;
-        ProjectileColorType = "Rainbow";
-        ProjectileColor = 120;
-        RainbowSpeed = 10;
-        ProjectileOutline = 0;
-        ProjectileNumber = 400;
-        RateOfFire = 100;
-        ProjectileSpeed = 1;
-        ProjectileDirection = 0;
-        ProjectileSpinSpeed = 605;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "Bounce";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 100;
+        projectileShape = "Circle";
+        projectileLength = 50;
+        projectileWidth = 25;
+        projectileColorType = "Rainbow";
+        projectileColor = 120;
+        rainbowSpeed = 10;
+        projectileOutline = 0;
+        projectileNumber = 400;
+        rateOfFire = 100;
+        projectileSpeed = 1;
+        projectileDirection = 0;
+        projectileSpinSpeed = 605;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "Bounce";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset9_Sprite.mouse.released())
+    if(preset9_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Square";
-        ProjectileLength = 10;
-        ProjectileWidth = 300;
-        ProjectileColorType = "Random";
-        ProjectileColor = 120;
-        RainbowSpeed = 0;
-        ProjectileOutline = 0;
-        ProjectileNumber = 150;
-        RateOfFire = 100;
-        ProjectileSpeed = 1;
-        ProjectileDirection = 0;
-        ProjectileSpinSpeed = 450;
-        ScreenSquare = "True";
-        ProjectileCollisionWithWallMode = "Bounce";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 10;
+        projectileWidth = 300;
+        projectileColorType = "Random";
+        projectileColor = 120;
+        rainbowSpeed = 0;
+        projectileOutline = 0;
+        projectileNumber = 150;
+        rateOfFire = 100;
+        projectileSpeed = 1;
+        projectileDirection = 0;
+        projectileSpinSpeed = 450;
+        screenSquare = "True";
+        projectileCollisionWithWallMode = "Bounce";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset10_Sprite.mouse.released())
+    if(preset10_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Square";
-        ProjectileLength = 75;
-        ProjectileWidth = 100;
-        ProjectileColorType = "Rainbow";
-        RainbowSpeed = 3;
-        ProjectileOutline = 1;
-        ProjectileNumber = Infinity;
-        RateOfFire = 100;
-        ProjectileSpeed = 2.75;
-        ProjectileDirection = 0;
-        ProjectileSpinSpeed = 100;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "None";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 75;
+        projectileWidth = 100;
+        projectileColorType = "Rainbow";
+        rainbowSpeed = 3;
+        projectileOutline = 1;
+        projectileNumber = Infinity;
+        rateOfFire = 100;
+        projectileSpeed = 2.75;
+        projectileDirection = 0;
+        projectileSpinSpeed = 100;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "None";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset11_Sprite.mouse.released())
+    if(preset11_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Circle";
-        ProjectileLength = 100;
-        ProjectileWidth = 20;
-        ProjectileColorType = "Rainbow";
-        ProjectileColor = 120;
-        RainbowSpeed = 10;
-        ProjectileNumber = 200;
-        RateOfFire = 100;
-        ProjectileSpeed = 20;
-        ProjectileDirection = 70;
-        ProjectileSpinSpeed = 900;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "Loop";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Circle";
+        projectileLength = 100;
+        projectileWidth = 20;
+        projectileColorType = "Rainbow";
+        projectileColor = 120;
+        rainbowSpeed = 10;
+        projectileOutline = 0;
+        projectileNumber = 200;
+        rateOfFire = 100;
+        projectileSpeed = 20;
+        projectileDirection = 70;
+        projectileSpinSpeed = 900;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "Loop";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
 
-    if(Preset12_Sprite.mouse.released())
+    if(preset12_Sprite.mouse.released())
     {
-        BackgroundColor = "Black";
-        OriginX_Per = 50;
-        OriginY_Per = 50;
-        ProjectileShape = "Square";
-        ProjectileLength = 50;
-        ProjectileWidth = 10;
-        ProjectileColorType = "Rainbow";
-        ProjectileColor = 120;
-        RainbowSpeed = 10;
-        ProjectileOutline = 0;
-        ProjectileNumber = 250;
-        RateOfFire = 100;
-        ProjectileSpeed = 100;
-        ProjectileDirection = 270;
-        ProjectileSpinSpeed = .1;
-        ScreenSquare = "False";
-        ProjectileCollisionWithWallMode = "Bounce";
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 50;
+        projectileWidth = 10;
+        projectileColorType = "Rainbow";
+        projectileColor = 120;
+        rainbowSpeed = 10;
+        projectileOutline = 0;
+        projectileNumber = 250;
+        rateOfFire = 100;
+        projectileSpeed = 100;
+        projectileDirection = 270;
+        projectileSpinSpeed = .1;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "Bounce";
 
-        ChangeOriginPosition();
-        DeleteProjectiles();
-        SetGameStatus("Running");
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
     }
     
     //* Saves:
 
-    if(Save1_Sprite.mouse.released())
+    if(save1_Sprite.mouse.released())
     {
-        BackgroundColor_Save_1 = BackgroundColor;
-        OriginX_Per_Save_1 = OriginX_Per;
-        OriginY_Per_Save_1 = OriginY_Per;
-        ProjectileShape_Save_1 = ProjectileShape;
-        ProjectileLength_Save_1 = ProjectileLength;
-        ProjectileWidth_Save_1 = ProjectileWidth;
-        ProjectileColorType_Save_1 = ProjectileColorType;
-        ProjectileColor_Save_1 = ProjectileColor;
-        RainbowSpeed_Save_1 = RainbowSpeed;
-        ProjectileOutline_Save_1 = ProjectileOutline;
-        ProjectileNumber_Save_1 = ProjectileNumber;
-        RateOfFire_Save_1 = RateOfFire;
-        ProjectileSpeed_Save_1 = ProjectileSpeed;
-        ProjectileDirection_Save_1 = ProjectileDirection;
-        ProjectileSpinSpeed_Save_1 = ProjectileSpinSpeed;
-        ScreenSquare_Save_1 = ScreenSquare;
-        ProjectileCollisionWithWallMode_Save_1 = ProjectileCollisionWithWallMode;
+        backgroundColor_Save_1 = backgroundColor;
+        originX_Per_Save_1 = originX_Per;
+        originY_Per_Save_1 = originY_Per;
+        projectileShape_Save_1 = projectileShape;
+        projectileLength_Save_1 = projectileLength;
+        projectileWidth_Save_1 = projectileWidth;
+        projectileColorType_Save_1 = projectileColorType;
+        projectileColor_Save_1 = projectileColor;
+        rainbowSpeed_Save_1 = rainbowSpeed;
+        projectileOutline_Save_1 = projectileOutline;
+        projectileNumber_Save_1 = projectileNumber;
+        rateOfFire_Save_1 = rateOfFire;
+        projectileSpeed_Save_1 = projectileSpeed;
+        projectileDirection_Save_1 = projectileDirection;
+        projectileSpinSpeed_Save_1 = projectileSpinSpeed;
+        screenSquare_Save_1 = screenSquare;
+        projectileCollisionWithWallMode_Save_1 = projectileCollisionWithWallMode;
 
     }
 
-    if(Load1_Sprite.mouse.released())
+    if(load1_Sprite.mouse.released())
     {
-        if(BackgroundColor_Save_1 != null)
+        if(backgroundColor_Save_1 != null)
         {
-            BackgroundColor = BackgroundColor_Save_1;
-            OriginX_Per = OriginX_Per_Save_1;
-            OriginY_Per = OriginY_Per_Save_1;
-            ProjectileShape = ProjectileShape_Save_1;
-            ProjectileLength = ProjectileLength_Save_1;
-            ProjectileWidth = ProjectileWidth_Save_1;
-            ProjectileColorType = ProjectileColorType_Save_1;
-            ProjectileColor = ProjectileColor_Save_1;
-            RainbowSpeed = RainbowSpeed_Save_1;
-            ProjectileOutline = ProjectileOutline_Save_1;
-            ProjectileNumber = ProjectileNumber_Save_1;
-            RateOfFire = RateOfFire_Save_1;
-            ProjectileSpeed = ProjectileSpeed_Save_1;
-            ProjectileDirection = ProjectileDirection_Save_1;
-            ProjectileSpinSpeed = ProjectileSpinSpeed_Save_1;
-            ScreenSquare = ScreenSquare_Save_1;
-            ProjectileCollisionWithWallMode = ProjectileCollisionWithWallMode_Save_1;
+            backgroundColor = backgroundColor_Save_1;
+            originX_Per = originX_Per_Save_1;
+            originY_Per = originY_Per_Save_1;
+            projectileShape = projectileShape_Save_1;
+            projectileLength = projectileLength_Save_1;
+            projectileWidth = projectileWidth_Save_1;
+            projectileColorType = projectileColorType_Save_1;
+            projectileColor = projectileColor_Save_1;
+            rainbowSpeed = rainbowSpeed_Save_1;
+            projectileOutline = projectileOutline_Save_1;
+            projectileNumber = projectileNumber_Save_1;
+            rateOfFire = rateOfFire_Save_1;
+            projectileSpeed = projectileSpeed_Save_1;
+            projectileDirection = projectileDirection_Save_1;
+            projectileSpinSpeed = projectileSpinSpeed_Save_1;
+            screenSquare = screenSquare_Save_1;
+            projectileCollisionWithWallMode = projectileCollisionWithWallMode_Save_1;
 
-            ChangeOriginPosition();
-            DeleteProjectiles();
-            SetGameStatus("Running");
+            changeOriginPosition();
+            deleteProjectiles();
+            setGameStatus("Running");
         }
     }
 
-    if(Save2_Sprite.mouse.released())
+    if(save2_Sprite.mouse.released())
     {
-        BackgroundColor_Save_2 = BackgroundColor;
-        OriginX_Per_Save_2 = OriginX_Per;
-        OriginY_Per_Save_2 = OriginY_Per;
-        ProjectileShape_Save_2 = ProjectileShape;
-        ProjectileLength_Save_2 = ProjectileLength;
-        ProjectileWidth_Save_2 = ProjectileWidth;
-        ProjectileColorType_Save_2 = ProjectileColorType;
-        ProjectileColor_Save_2 = ProjectileColor;
-        RainbowSpeed_Save_2 = RainbowSpeed;
-        ProjectileOutline_Save_1 = ProjectileOutline;
-        ProjectileNumber_Save_2 = ProjectileNumber;
-        RateOfFire_Save_2 = RateOfFire;
-        ProjectileSpeed_Save_2 = ProjectileSpeed;
-        ProjectileDirection_Save_2 = ProjectileDirection;
-        ProjectileSpinSpeed_Save_2 = ProjectileSpinSpeed;
-        ScreenSquare_Save_2 = ScreenSquare;
-        ProjectileCollisionWithWallMode_Save_2 = ProjectileCollisionWithWallMode;
+        backgroundColor_Save_2 = backgroundColor;
+        originX_Per_Save_2 = originX_Per;
+        originY_Per_Save_2 = originY_Per;
+        projectileShape_Save_2 = projectileShape;
+        projectileLength_Save_2 = projectileLength;
+        projectileWidth_Save_2 = projectileWidth;
+        projectileColorType_Save_2 = projectileColorType;
+        projectileColor_Save_2 = projectileColor;
+        rainbowSpeed_Save_2 = rainbowSpeed;
+        projectileOutline_Save_1 = projectileOutline;
+        projectileNumber_Save_2 = projectileNumber;
+        rateOfFire_Save_2 = rateOfFire;
+        projectileSpeed_Save_2 = projectileSpeed;
+        projectileDirection_Save_2 = projectileDirection;
+        projectileSpinSpeed_Save_2 = projectileSpinSpeed;
+        screenSquare_Save_2 = screenSquare;
+        projectileCollisionWithWallMode_Save_2 = projectileCollisionWithWallMode;
 
     }
 
-    if(Load2_Sprite.mouse.released())
+    if(load2_Sprite.mouse.released())
     {
-        if(BackgroundColor_Save_2 != null)
+        if(backgroundColor_Save_2 != null)
         {
-            BackgroundColor = BackgroundColor_Save_2;
-            OriginX_Per = OriginX_Per_Save_2;
-            OriginY_Per = OriginY_Per_Save_2;
-            ProjectileShape = ProjectileShape_Save_2;
-            ProjectileLength = ProjectileLength_Save_2;
-            ProjectileWidth = ProjectileWidth_Save_2;
-            ProjectileColorType = ProjectileColorType_Save_2;
-            ProjectileColor = ProjectileColor_Save_2;
-            RainbowSpeed = RainbowSpeed_Save_2;
-            ProjectileOutline = ProjectileOutline_Save_2;
-            ProjectileNumber = ProjectileNumber_Save_2;
-            RateOfFire = RateOfFire_Save_2;
-            ProjectileSpeed = ProjectileSpeed_Save_2;
-            ProjectileDirection = ProjectileDirection_Save_2;
-            ProjectileSpinSpeed = ProjectileSpinSpeed_Save_2;
-            ScreenSquare = ScreenSquare_Save_2;
-            ProjectileCollisionWithWallMode = ProjectileCollisionWithWallMode_Save_2;
+            backgroundColor = backgroundColor_Save_2;
+            originX_Per = originX_Per_Save_2;
+            originY_Per = originY_Per_Save_2;
+            projectileShape = projectileShape_Save_2;
+            projectileLength = projectileLength_Save_2;
+            projectileWidth = projectileWidth_Save_2;
+            projectileColorType = projectileColorType_Save_2;
+            projectileColor = projectileColor_Save_2;
+            rainbowSpeed = rainbowSpeed_Save_2;
+            projectileOutline = projectileOutline_Save_2;
+            projectileNumber = projectileNumber_Save_2;
+            rateOfFire = rateOfFire_Save_2;
+            projectileSpeed = projectileSpeed_Save_2;
+            projectileDirection = projectileDirection_Save_2;
+            projectileSpinSpeed = projectileSpinSpeed_Save_2;
+            screenSquare = screenSquare_Save_2;
+            projectileCollisionWithWallMode = projectileCollisionWithWallMode_Save_2;
 
-            ChangeOriginPosition();
-            DeleteProjectiles();
-            SetGameStatus("Running");
+            changeOriginPosition();
+            deleteProjectiles();
+            setGameStatus("Running");
         }
     }
 }

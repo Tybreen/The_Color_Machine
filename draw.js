@@ -3,104 +3,86 @@
 function draw()
 {
 
-    if(BackgroundColor == "Black") background(0);
-    else if(BackgroundColor == "White") background(255);
+    if(backgroundColor == "Black") background(0);
+    else if(backgroundColor == "White") background(255);
 
-    if(ProjectileCollisionWithWallMode == "None") Cleaner();
-    else if(ProjectileCollisionWithWallMode == "Bounce") Bounce();
-    else if(ProjectileCollisionWithWallMode == "Loop") Loop();
+    if(projectileCollisionWithWallMode == "None") cleaner();
+    else if(projectileCollisionWithWallMode == "Bounce") bounceManager();
+    else if(projectileCollisionWithWallMode == "Loop") loopManager();
 
-    if(ProjectileSpinSpeed != 0 && GameStatus == "Running") OriginSpinSpeedProcessing();
+    if(projectileSpinSpeed != 0 && gameStatus == "Running") originSpinSpeedProcessing();
 
-    if(GameStatus == "Idle" && Projectiles.length == 0) SetGameStatus("Stopped");
+    if(gameStatus == "Idle" && projectiles.length == 0) setGameStatus("Stopped");
 
     if(createdGroup0) standardButtonsControls();
     if(createdGroup1) settingsButtonsControls();
     if(createdGroup2) presetButtonsControls();
 
-    //deltaTimeProjectileSpeedChange();
-
-    Origin.draw();
-
-    /*if(ProjectileTrails > 0) 
-    {
-        console.log(Origin.OriginX_Pix);
-        beginLayer();
-        if(BackgroundColor == "Black") background(0, ProjectileTrails);
-        else if(BackgroundColor == "White") background(255, ProjectileTrails);
-
-    }*/
-
+    origin.draw();
     
-    Projectiles.draw();
+    projectiles.draw();
 
-    //endLayer();
-    //drawSprites(Trails);
+    uiHide_Sprite.draw();
 
-    UIHide_Sprite.draw();
+    createProjectiles();
 
-    CreateProjectiles();
+    changeMouseStatusForButton(uiHide_Sprite);
 
-    ChangeMouseStatusForButton(UIHide_Sprite);
-    ChangeMouseStatusForButton(BackgroundColor_Sprite);
-    ChangeMouseStatusForButton(OpenPresets_Sprite);
-    ChangeMouseStatusForButton(Start_Sprite);
+    changeMouseStatusForButtons(standardButtons);
+    changeMouseStatusForButtons(settingsButtons);
+    changeMouseStatusForButtons(presetButtons);
 
-    ChangeMouseStatusForButtons(settingsButtons);
-    ChangeMouseStatusForButtons(presetButtons);
-
-    ChangeMouseStatus();
+    changeMouseStatus();
     
-    //if(ProjectileTrails != 0) CreateTrails();
 
-    if(RainbowSpeed != 0 && ProjectileColorType == "Rainbow" && GameStatus == "Running")
+    if(rainbowSpeed != 0 && projectileColorType == "Rainbow" && gameStatus == "Running")
     {
-        if(Blue <= 0 && Red >= 255) Green += Number(RainbowSpeed);
-        if(Blue <= 0 && Green >= 255) Red -= Number(RainbowSpeed);
-        if(Red <= 0 && Green >= 255) Blue += Number(RainbowSpeed);
-        if(Red <= 0 && Blue >= 255) Green -= Number(RainbowSpeed);
-        if(Green <= 0 && Blue >= 255) Red += Number(RainbowSpeed);
-        if(Green <= 0 && Red >= 255) Blue -= Number(RainbowSpeed);
+        if(blue <= 0 && red >= 255) green += Number(rainbowSpeed);
+        if(blue <= 0 && green >= 255) red -= Number(rainbowSpeed);
+        if(red <= 0 && green >= 255) blue += Number(rainbowSpeed);
+        if(red <= 0 && blue >= 255) green -= Number(rainbowSpeed);
+        if(green <= 0 && blue >= 255) red += Number(rainbowSpeed);
+        if(green <= 0 && red >= 255) blue -= Number(rainbowSpeed);
     }
 
     //FPS:
 
     fill(120);
-    textSize( Math.floor(ButtonHeight / 2) );
-    text("FPS " + FPS, width - ButtonHeight, ButtonHeight / 2);
+    textSize(buttonHeight / 2);
+    text("FPS " + fps, width - buttonHeight, buttonHeight / 2);
 
 
-    if(!InstructionText) this.Text.remove();
+    if(!instructionText) this.introText.remove();
 
-    if(BackgroundColor == "Black") fill("White");
-    else if(BackgroundColor == "White") fill("Black");
+    if(backgroundColor == "Black") fill("White");
+    else if(backgroundColor == "White") fill("Black");
 
-    textSize( Math.floor(ButtonHeight / 2) );
-    if(UIHide) CreateText("UI", "Show", 1, 1);
+    textSize( Math.floor(buttonHeight / 2) );
+    if(uiHide) createText("UI", "Show", 1, 1);
 
-    else if(!UIHide) CreateText("UI", "Hide", 1, 1);
+    else if(!uiHide) createText("UI", "Hide", 1, 1);
 
 
-    if((!UIHide && UIGroup == 1) && ColorPicker == null) CreateColorPicker();
+    if((!uiHide && uiGroup == 1) && colorPicker == null) createMyColorPicker();
     
-    else if((UIHide || UIGroup == 2) && ColorPicker != null) 
+    else if((uiHide || uiGroup == 2) && colorPicker != null) 
     {
-        ColorPicker.remove();
-        ColorPicker = null;
+        colorPicker.remove();
+        colorPicker = null;
     }
 
-    if(UIHide_Sprite.mouse.released())
+    if(uiHide_Sprite.mouse.released())
     {
-        if(UIHide)
+        if(uiHide)
         {
-            UIHide = false;
-            createMyButtonGroup(0);
+            uiHide = false;
+            createButtonGroup(0);
         }
 
-        else if(!UIHide) UIHide = true;
+        else if(!uiHide) uiHide = true;
     }
 
-    if(UIHide)
+    if(uiHide)
     {   
         if(createdGroup1) deleteButtonGroup(1);
         if(createdGroup2) deleteButtonGroup(2);
@@ -108,19 +90,19 @@ function draw()
     }
 
 
-    if(!UIHide)
+    if(!uiHide)
     {
         standardButtons.draw();
 
         // Group 1:
 
-        if(UIGroup == 1) 
+        if(uiGroup == 1) 
         {
 
             if(!createdGroup1)
             {
                 deleteButtonGroup(2);
-                createMyButtonGroup(1);
+                createButtonGroup(1);
             }
             
             settingsButtons.draw();
@@ -128,110 +110,109 @@ function draw()
         
             // Left Texts:
 
-            textSize( Math.floor(ButtonHeight / 2.6) );
-            CreateText("Projectile Shape", ProjectileShape, 1, 4);
-            textSize( Math.floor(ButtonHeight / 2.6) );
-            CreateText("Projectile Length", ProjectileLength, 1, 5);
-            textSize( Math.floor(ButtonHeight / 2.6) );
-            CreateText("Projectile Width", ProjectileWidth, 1, 6);
-            textSize( Math.floor(ButtonHeight / 3.3) );
-            CreateText("Projectile Color Type", ProjectileColorType, 1, 7);
-            textSize( Math.floor(ButtonHeight / 2.5) );
-            CreateText("Projectile Color", "", 1, 8);
-            textSize( Math.floor(ButtonHeight / 2.6) );
-            CreateText("Rainbow Speed", RainbowSpeed, 1, 9);
-            textSize( Math.floor(ButtonHeight / 2.8) );
-            CreateText("Projectile Outline", ProjectileOutline, 1, 10);
+            textSize( Math.floor(buttonHeight / 2.6) );
+            createText("Projectile Shape", projectileShape, 1, 4);
+            textSize( Math.floor(buttonHeight / 2.6) );
+            createText("Projectile Length", projectileLength, 1, 5);
+            textSize( Math.floor(buttonHeight / 2.6) );
+            createText("Projectile Width", projectileWidth, 1, 6);
+            textSize( Math.floor(buttonHeight / 3.3) );
+            createText("Projectile Color Type", projectileColorType, 1, 7);
+            textSize( Math.floor(buttonHeight / 2.5) );
+            createText("Projectile Color", "", 1, 8);
+            textSize( Math.floor(buttonHeight / 2.6) );
+            createText("Rainbow Speed", rainbowSpeed, 1, 9);
+            textSize( Math.floor(buttonHeight / 2.8) );
+            createText("Projectile Outline", projectileOutline, 1, 10);
 
 
             // Right Texts:
 
-            textSize( Math.floor(ButtonHeight / 2) );
-            CreateText("Origin X", OriginX_Per + "%", 2, 1);
-            textSize( Math.floor(ButtonHeight / 2) );
-            CreateText("Origin Y", OriginY_Per + "%", 2, 2);
-            textSize( Math.floor(ButtonHeight / 2) );
-            CreateText("Rate of Fire", RateOfFire + " per Sec", 2, 3);
-            textSize( Math.floor(ButtonHeight / 3.5) );
-            CreateText("Number of Projectiles", ProjectileNumber, 2, 4);
-            textSize( Math.floor(ButtonHeight / 2.7) );
-            CreateText("Projectile Speed", ProjectileSpeed, 2, 5);
-            textSize( Math.floor(ButtonHeight / 2.6) );
-            CreateText("Origin Direction", Math.floor(ProjectileDirection), 2, 6);
-            textSize( Math.floor(ButtonHeight / 3) );
-            CreateText("Origin Spin Speed", ProjectileSpinSpeed, 2, 7);
-            textSize( Math.floor(ButtonHeight / 2.5) );
-            CreateText("Square Screen", ScreenSquare, 2, 8);
-            textSize( Math.floor(ButtonHeight / 3) );
-            CreateText("With Wall Mode", ProjectileCollisionWithWallMode, 2, 9);
-            textSize( Math.floor(ButtonHeight / 3) );
-            text("Projectile Collision", width - offsetOffWall, (ButtonHeight * 9) + (offsetBetweenButtons * 9) /* <-- Order of Buttons*/ - (ButtonHeight * 17/20));
+            textSize( Math.floor(buttonHeight / 2) );
+            createText("Origin X", originX_Per + "%", 2, 1);
+            textSize( Math.floor(buttonHeight / 2) );
+            createText("Origin Y", originY_Per + "%", 2, 2);
+            textSize( Math.floor(buttonHeight / 2) );
+            createText("Rate of Fire", rateOfFire + " per Sec", 2, 3);
+            textSize( Math.floor(buttonHeight / 3.5) );
+            createText("Number of Projectiles", projectileNumber, 2, 4);
+            textSize( Math.floor(buttonHeight / 2.7) );
+            createText("Projectile Speed", projectileSpeed, 2, 5);
+            textSize( Math.floor(buttonHeight / 2.6) );
+            createText("Origin Direction", Math.floor(projectileDirection), 2, 6);
+            textSize( Math.floor(buttonHeight / 3) );
+            createText("Origin Spin Speed", projectileSpinSpeed, 2, 7);
+            textSize( Math.floor(buttonHeight / 2.5) );
+            createText("Square Screen", screenSquare, 2, 8);
+            textSize( Math.floor(buttonHeight / 3) );
+            createText("With Wall Mode", projectileCollisionWithWallMode, 2, 9);
+            textSize( Math.floor(buttonHeight / 3) );
+            text("Projectile Collision", width - offsetOffWall, (buttonHeight * 9) + (offsetBetweenButtons * 9) /* <-- Order of Buttons*/ - (buttonHeight * 17/20));
             
         }
         
         // Group 2:
 
-        else if(UIGroup == 2)
+        else if(uiGroup == 2)
         {
             if(!createdGroup2)
             {
                 deleteButtonGroup(1);
-                createMyButtonGroup(2);
+                createButtonGroup(2);
             }
 
             presetButtons.draw();
 
-            CreateText("Preset 1", "Click", 1, 4);
-            CreateText("Preset 2", "Click", 1, 5);
-            CreateText("Preset 3", "Click", 1, 6);
-            CreateText("Preset 4", "Click", 1, 7);
-            CreateText("Preset 5", "Click", 1, 8);
-            CreateText("Preset 6", "Click", 1, 9);
-            CreateText("Preset 7", "Click", 1, 10);
+            createText("Preset 1", "Click", 1, 4);
+            createText("Preset 2", "Click", 1, 5);
+            createText("Preset 3", "Click", 1, 6);
+            createText("Preset 4", "Click", 1, 7);
+            createText("Preset 5", "Click", 1, 8);
+            createText("Preset 6", "Click", 1, 9);
+            createText("Preset 7", "Click", 1, 10);
 
-            CreateText("Preset 8", "Click", 2, 1);
-            CreateText("Preset 9", "Click", 2, 2);
-            CreateText("Preset 10", "Click", 2, 3);
-            CreateText("Preset 11", "Click", 2, 4);
-            CreateText("Preset 12", "Click", 2, 5);
+            createText("Preset 8", "Click", 2, 1);
+            createText("Preset 9", "Click", 2, 2);
+            createText("Preset 10", "Click", 2, 3);
+            createText("Preset 11", "Click", 2, 4);
+            createText("Preset 12", "Click", 2, 5);
 
 
-            if(BackgroundColor_Save_1 == null)
+            if(backgroundColor_Save_1 == null)
             {
-                CreateText("Save 1", "Save", 2, 6);
-                CreateText("Load 1", "Can't Load", 2, 7);
+                createText("Save 1", "Save", 2, 6);
+                createText("Load 1", "Can't Load", 2, 7);
             }
             else
             {
-                CreateText("Save 1", "Saved", 2, 6);
-                CreateText("Load 1", "Load", 2, 7);
+                createText("Save 1", "Saved", 2, 6);
+                createText("Load 1", "Load", 2, 7);
             }
 
-            if(BackgroundColor_Save_2 == null)
+            if(backgroundColor_Save_2 == null)
             {
-                CreateText("Save 2", "Save", 2, 8);
-                CreateText("Load 2", "Can't Load", 2, 9);
+                createText("Save 2", "Save", 2, 8);
+                createText("Load 2", "Can't Load", 2, 9);
             }
             else
             {
-                CreateText("Save 2", "Saved", 2, 8);
-                CreateText("Load 2", "Load", 2, 9);
+                createText("Save 2", "Saved", 2, 8);
+                createText("Load 2", "Load", 2, 9);
             }
 
         }
 
-        textSize( Math.floor(ButtonHeight / 3) );
-        if(BackgroundColor == "Black") CreateText("Background Color","Black", 1, 2);
-        else if(BackgroundColor == "White") CreateText("Background Color", "White", 1, 2);
+        textSize( Math.floor(buttonHeight / 3) );
+        if(backgroundColor == "Black") createText("Background Color","Black", 1, 2);
+        else if(backgroundColor == "White") createText("Background Color", "White", 1, 2);
 
-        if(UIGroup == 1) var o = "Open";
-        else if(UIGroup == 2) o = "Close";
+        if(uiGroup == 1) var o = "Open";
+        else if(uiGroup == 2) o = "Close";
 
-        CreateText("Presets", o, 1, 3);
+        createText("Presets", o, 1, 3);
 
-        textSize( Math.floor(ButtonHeight / 2.5) );
-        CreateText(Projectiles.length + " Projectiles", StartText, 2, 10);
-
+        textSize( Math.floor(buttonHeight / 2.5) );
+        createText(projectiles.length + " Projectiles", startText, 2, 10);
 
     }
 

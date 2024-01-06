@@ -1,74 +1,63 @@
 //# Miscellaneous but important functions:
 
-function SetGameStatus(status)
+function setGameStatus(status)
 {
     if(status == "Running") 
     {
-        Red = 255;
-        Green = 0;
-        Blue = 0;
+        red = 255;
+        green = 0;
+        blue = 0;
   
-        GameStatus = "Running";
-        StartText = "Stop";
-        InstructionText = false;
+        gameStatus = "Running";
+        startText = "Stop";
+        if(instructionText) instructionText = false;
     }
 
     else if(status == "Idle")
     {
-        GameStatus = "Idle";
-        StartText = "Reset";
+        gameStatus = "Idle";
+        startText = "Reset";
     }
     else if(status == "Stopped")
     {
-        GameStatus = "Stopped";
-        StartText = "Start";
+        gameStatus = "Stopped";
+        startText = "Start";
     }
 }
   
-/*
-function deltaTimeProjectileSpeedChange()
+function changeOriginPosition()
 {
-    for(i in Projectiles)
-    {
-        i.setSpeed(i.getSpeed() * (deltaTime * 60));
-        if(Projectiles[0]); //console.log(Projectiles[0].getSpeed());
-    }
-}
-*/
-  
-function ChangeOriginPosition()
-{
-    ChangeOriginXPosition();
-    ChangeOriginYPosition();
+    changeOriginXPosition();
+    changeOriginYPosition();
 }
   
-function ChangeOriginXPosition()
+function changeOriginXPosition()
 {
-    OriginX_Pix = (OriginX_Per / 100) * width;
-    Origin.position.x = OriginX_Pix;
+    originX_Pix = (originX_Per / 100) * width;
+    origin.position.x = originX_Pix;
 }
   
-function ChangeOriginYPosition()
+function changeOriginYPosition()
 {
-    OriginY_Pix = (OriginY_Per / 100) * height;
-    Origin.position.y = OriginY_Pix;
+    originY_Pix = (originY_Per / 100) * height;
+    origin.position.y = originY_Pix;
 }
   
   
   
-function OriginSpinSpeedProcessing()
+function originSpinSpeedProcessing()
 {
-    ProjectileDirection += Number(ProjectileSpinSpeed) / 10;
+    projectileDirection += Number(projectileSpinSpeed) / 10;
   
-    if (ProjectileDirection >= 360) ProjectileDirection -= 360;
-    else if (ProjectileDirection <= 0) ProjectileDirection += 360;
+    if (projectileDirection >= 360) projectileDirection -= 360;
+    else if (projectileDirection <= 0) projectileDirection += 360;
 }
   
   
   
-function ScreenSquareManager()
+function screenSquareManager()
 {
-    if(ScreenSquare == "True")
+    if(screenSquare == "True")
     {
         if(offsetX_SS == 0 && offsetY_SS == 0)
         {
@@ -91,7 +80,7 @@ function ScreenSquareManager()
         }
     }
   
-    if(ScreenSquare == "False" && (offsetX_SS != 0 || offsetY_SS != 0))
+    if(screenSquare == "False" && (offsetX_SS != 0 || offsetY_SS != 0))
     {
       offsetX_SS = 0;
       offsetY_SS = 0;
@@ -99,100 +88,101 @@ function ScreenSquareManager()
 }
   
   
-function Bounce()
+function bounceManager()
 {
-    ScreenSquareManager();
+    screenSquareManager();
   
-    for (var i = 0; i < Projectiles.length; i++)
+    for (var i = 0; i < projectiles.length; i++)
     {
-        var s = Projectiles[i];
+        var s = projectiles[i];
   
         if(s.position.x < offsetX_SS)
         {
             s.position.x = offsetX_SS;
             s.velocity.x = abs(s.velocity.x);
-            Projectiles[i].rotation = s.direction - 90;
+            projectiles[i].rotation = s.direction - 90;
         }
   
         if (s.position.x > width - offsetX_SS)
         {
             s.position.x = width - offsetX_SS;
             s.velocity.x = -abs(s.velocity.x);
-            Projectiles[i].rotation = s.direction - 90;
+            projectiles[i].rotation = s.direction - 90;
         }
   
         if(s.position.y < offsetY_SS)
         {
         s.position.y = offsetY_SS;
         s.velocity.y = abs(s.velocity.y);
-        Projectiles[i].rotation = s.direction - 90;
+        projectiles[i].rotation = s.direction - 90;
         }
   
         if(s.position.y > height - offsetY_SS)
         {
         s.position.y = height - offsetY_SS;
         s.velocity.y = -abs(s.velocity.y);
-        Projectiles[i].rotation = s.direction - 90;
+        projectiles[i].rotation = s.direction - 90;
         }
     }
 }
   
 
-function Loop() {
-    ScreenSquareManager();
+function loopManager()
+{
+    screenSquareManager();
   
-    for(var i = 0; i < Projectiles.length; i++)
+    for(var i = 0; i < projectiles.length; i++)
     {
-        var s = Projectiles[i];
+        var s = projectiles[i];
   
         if (s.position.x < offsetX_SS)
         {
-            Projectiles[i].position.x = width - offsetX_SS;
+            projectiles[i].position.x = width - offsetX_SS;
         }
   
         if(s.position.x > width - offsetX_SS)
         {
-            Projectiles[i].position.x = offsetX_SS;
+            projectiles[i].position.x = offsetX_SS;
         }
   
         if (s.position.y < offsetY_SS)
         {
-            Projectiles[i].position.y = height - offsetY_SS;
+            projectiles[i].position.y = height - offsetY_SS;
         }
   
         if(s.position.y > height - offsetY_SS)
         {
-        Projectiles[i].position.y = offsetY_SS;
+        projectiles[i].position.y = offsetY_SS;
         }
     }
 }
   
   
-function Cleaner()
+function cleaner()
 {
-    ScreenSquareManager();
+    screenSquareManager();
   
-    for(var i = 0; i < Projectiles.length; i++)
+    for(var i = 0; i < projectiles.length; i++)
     {
-        var Item = Projectiles[i];
+        var item = projectiles[i];
   
-        if(Item.position.x <= offsetX_SS - ProjectileLength / 2 || Item.position.x >= width - offsetX_SS + ProjectileLength / 2 || Item.position.y <= offsetY_SS - ProjectileLength / 2 || Item.position.y >= height - offsetY_SS + ProjectileLength / 2)
+        if(item.position.x <= offsetX_SS - projectileLength / 2 || item.position.x >= width - offsetX_SS + projectileLength / 2 || item.position.y <= offsetY_SS - projectileLength / 2 || item.position.y >= height - offsetY_SS + projectileLength / 2)
         {
-            Item.remove();
+            item.remove();
             i--;
         }
     }
 }
   
 
-function ChangeMouseStatus()
+function changeMouseStatus()
 {
     if(mouseMode == "HAND") cursor(HAND);
     else if(mouseMode == "ARROW") cursor(ARROW);
 }
   
   
-function ChangeMouseStatusForButton(sprite)
+function changeMouseStatusForButton(sprite)
 {
     if(sprite.mouse.hovering()) mouseMode = "HAND";
     if(sprite.mouse.hovered()) mouseMode = "ARROW";
@@ -200,11 +190,11 @@ function ChangeMouseStatusForButton(sprite)
 }
   
   
-function ChangeMouseStatusForButtons(group)
+function changeMouseStatusForButtons(group)
 {
     for(var i = 0; i < group.length; i++)
     {
-        ChangeMouseStatusForButton(group[i]);
+        changeMouseStatusForButton(group[i]);
     }
 }
   

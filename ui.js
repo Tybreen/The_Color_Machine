@@ -4,113 +4,98 @@
 
 //* Color Picker:
 
-function CreateColorPicker()
+function createMyColorPicker()
 {
-    ColorPicker = createColorPicker(ProjectileColor);
-    ColorPicker.position((offsetOffWall - 5) - (ButtonWidth / 2), (ButtonHeight * 8) + (offsetBetweenButtons * 8) /* <-- Order of Buttons*/ - (ButtonHeight / 2) - 5 );
-    ColorPicker.size(ButtonWidth * (1 + 1/8), ButtonHeight * (1 + 1/3));
-    ColorPicker.input(() => { ProjectileColor = ColorPicker.value() });
-
-    //console.log("file: ColorMachine.js:1374 ~ mouseMode:", mouseMode);
-
-    ColorPicker.mouseOver(() => 
-    {
-        mouseMode = "HAND";
-        console.log("enter");
-    });
-
-    ColorPicker.mouseOut(() => 
-    {
-        mouseMode = "ARROW";
-        console.log("exit");
-    });
+    colorPicker = createColorPicker(projectileColor);
+    colorPicker.position((offsetOffWall - 5) - (buttonWidth / 2), (buttonHeight * 8) + (offsetBetweenButtons * 8) /* <-- Order of Buttons*/ - (buttonHeight / 2) - 5 );
+    colorPicker.size(buttonWidth * (1 + 1/8), buttonHeight * (1 + 1/3));
+    colorPicker.input(() => { projectileColor = colorPicker.value() });
 }
 
 //* Creation/Deletion of Buttons
 
-function CreateButton(side, order, group, Hide=false)
+function createMyButton(side, order, group, hide=false)
 {
+    var side;
 
-    var Side;
+    if(side == 1) side = offsetOffWall;
+    else if(side == 2) side = width - offsetOffWall;
 
-    if(side == 1) Side = offsetOffWall;
-    else if(side == 2) Side = width - offsetOffWall;
+    if(!hide) {
 
-    if(!Hide) {
+        var currentButton;
 
-        var CurrentButton;
+        currentButton = new Sprite(side, (buttonHeight * order) + (offsetBetweenButtons * order), buttonWidth, buttonHeight, "static");
 
-        CurrentButton = new Sprite(Side, (ButtonHeight * order) + (offsetBetweenButtons * order), ButtonWidth, ButtonHeight, "static");
-
-        CurrentButton.draw = function() 
+        currentButton.draw = function() 
         {
             fill(120);
             noStroke();
-            rect(0, 0, ButtonWidth, ButtonHeight, 2);
+            rect(0, 0, buttonWidth, buttonHeight, 2);
         }
 
-        if(group == 1) settingsButtons.push(CurrentButton);
-        else if(group == 2) presetButtons.push(CurrentButton);
-        else if(group == 0) standardButtons.push(CurrentButton);
+        if(group == 1) settingsButtons.push(currentButton);
+        else if(group == 2) presetButtons.push(currentButton);
+        else if(group == 0) standardButtons.push(currentButton);
 
     }
 
-    return CurrentButton;
+    return currentButton;
 
 }
 
-function createMyButtonGroup(group)
+function createButtonGroup(group)
 {
     if(group == 1)
     {
-        ProjectileShape_Sprite = CreateButton(1, 4, 1);
-        ProjectileLength_Sprite = CreateButton(1, 5, 1);
-        ProjectileWidth_Sprite = CreateButton(1, 6, 1);
-        ProjectileColorType_Sprite = CreateButton(1, 7, 1);
-        RainbowSpeed_Sprite = CreateButton(1, 9, 1);
-        ProjectileOutline_Sprite = CreateButton(1, 10, 1);
+        projectileShape_Sprite = createMyButton(1, 4, 1);
+        projectileLength_Sprite = createMyButton(1, 5, 1);
+        projectileWidth_Sprite = createMyButton(1, 6, 1);
+        projectileColorType_Sprite = createMyButton(1, 7, 1);
+        rainbowSpeed_Sprite = createMyButton(1, 9, 1);
+        projectileOutline_Sprite = createMyButton(1, 10, 1);
         
-        OriginX_Sprite = CreateButton(2, 1, 1);
-        OriginY_Sprite = CreateButton(2, 2, 1);
-        RateOfFire_Sprite = CreateButton(2, 3, 1);
-        ProjectileNumber_Sprite = CreateButton(2, 4, 1);
-        ProjectileSpeed_Sprite = CreateButton(2, 5, 1);
-        ProjectileDirection_Sprite = CreateButton(2, 6, 1);
-        ProjectileSpinSpeed_Sprite = CreateButton(2, 7, 1);
-        ScreenSquare_Sprite = CreateButton(2, 8, 1);
-        ProjectileCollisionWithWallMode_Sprite = CreateButton(2, 9, 1);
+        originX_Sprite = createMyButton(2, 1, 1);
+        originY_Sprite = createMyButton(2, 2, 1);
+        rateOfFire_Sprite = createMyButton(2, 3, 1);
+        projectileNumber_Sprite = createMyButton(2, 4, 1);
+        projectileSpeed_Sprite = createMyButton(2, 5, 1);
+        projectileDirection_Sprite = createMyButton(2, 6, 1);
+        projectileSpinSpeed_Sprite = createMyButton(2, 7, 1);
+        screenSquare_Sprite = createMyButton(2, 8, 1);
+        projectileCollisionWithWallMode_Sprite = createMyButton(2, 9, 1);
 
         createdGroup1 = true;
     }
 
     else if(group == 2)
     {
-        Preset1_Sprite = CreateButton(1, 4, 2);
-        Preset2_Sprite = CreateButton(1, 5, 2);
-        Preset3_Sprite = CreateButton(1, 6, 2);
-        Preset4_Sprite = CreateButton(1, 7, 2);
-        Preset5_Sprite = CreateButton(1, 8, 2);
-        Preset6_Sprite = CreateButton(1, 9, 2);
-        Preset7_Sprite = CreateButton(1, 10, 2);
-        Preset8_Sprite = CreateButton(2, 1, 2);
-        Preset9_Sprite = CreateButton(2, 2, 2);
-        Preset10_Sprite = CreateButton(2, 3, 2);
-        Preset11_Sprite = CreateButton(2, 4, 2);
-        Preset12_Sprite = CreateButton(2, 5, 2);
+        preset1_Sprite = createMyButton(1, 4, 2);
+        preset2_Sprite = createMyButton(1, 5, 2);
+        preset3_Sprite = createMyButton(1, 6, 2);
+        preset4_Sprite = createMyButton(1, 7, 2);
+        preset5_Sprite = createMyButton(1, 8, 2);
+        preset6_Sprite = createMyButton(1, 9, 2);
+        preset7_Sprite = createMyButton(1, 10, 2);
+        preset8_Sprite = createMyButton(2, 1, 2);
+        preset9_Sprite = createMyButton(2, 2, 2);
+        preset10_Sprite = createMyButton(2, 3, 2);
+        preset11_Sprite = createMyButton(2, 4, 2);
+        preset12_Sprite = createMyButton(2, 5, 2);
         
 
-        Save1_Sprite = CreateButton(2, 6, 2);
-        Load1_Sprite = CreateButton(2, 7, 2);
-        Save2_Sprite = CreateButton(2, 8, 2);
-        Load2_Sprite = CreateButton(2, 9, 2);
+        save1_Sprite = createMyButton(2, 6, 2);
+        load1_Sprite = createMyButton(2, 7, 2);
+        save2_Sprite = createMyButton(2, 8, 2);
+        load2_Sprite = createMyButton(2, 9, 2);
 
         createdGroup2 = true;
     }
     else if(group == 0)
     {
-        BackgroundColor_Sprite = CreateButton(1, 2, 0);
-        OpenPresets_Sprite = CreateButton(1, 3, 0);
-        Start_Sprite = CreateButton(2, 10, 0);
+        backgroundColor_Sprite = createMyButton(1, 2, 0);
+        openPresets_Sprite = createMyButton(1, 3, 0);
+        start_Sprite = createMyButton(2, 10, 0);
 
         createdGroup0 = true;
     }
@@ -145,176 +130,134 @@ function deleteButtonGroup(group)
 
 function standardButtonsControls()
 {
-    if(BackgroundColor_Sprite.mouse.released())
+    if(backgroundColor_Sprite.mouse.released())
     {
-        if(BackgroundColor == "Black")
-        {
-            BackgroundColor = "White";
-        }
-    
-        else if(BackgroundColor == "White")
-        {
-            BackgroundColor = "Black";
-        }
+        if(backgroundColor == "Black") backgroundColor = "White";
+        else if(backgroundColor == "White") backgroundColor = "Black";
     }
     
 
-    if(OpenPresets_Sprite.mouse.released())
+    if(openPresets_Sprite.mouse.released())
     {
-        if(UIGroup == 1) UIGroup = 2;
-        else if(UIGroup == 2) UIGroup = 1;
-        
+        if(uiGroup == 1) uiGroup = 2;
+        else if(uiGroup == 2) uiGroup = 1;
     }
     
-    if(Start_Sprite.mouse.released())
+    if(start_Sprite.mouse.released())
     {
-        if(GameStatus == "Stopped")
+        if(gameStatus == "Stopped") setGameStatus("Running");
+        else if(gameStatus == "Running") setGameStatus("Idle");
+        else if(gameStatus == "Idle")
         {
-            SetGameStatus("Running");
+            setGameStatus("Stopped");
+            deleteProjectiles();
         }
-
-        else if(GameStatus == "Running")
-        {
-            SetGameStatus("Idle");
-        }
-
-        else if(GameStatus == "Idle")
-        {
-            SetGameStatus("Stopped");
-            DeleteProjectiles();
-        }
-
     }
 }
 
 function settingsButtonsControls()
 {
 
-    if(OriginX_Sprite.mouse.released())
+    if(originX_Sprite.mouse.released())
     {
-            
-        OriginX_Per = PromptsForButtons("Origin X = Vertical Axis", OriginX_Per);
-        if(OriginX_Per > 100) OriginX_Per = 100;
-        else if(OriginX_Per < 0) OriginX_Per = 0;
+        originX_Per = promptsForButtons("Origin X = Vertical Axis", originX_Per);
+        if(originX_Per > 100) originX_Per = 100;
+        else if(originX_Per < 0) originX_Per = 0;
 
-        ChangeOriginXPosition();
+        changeOriginXPosition();
     }
 
-    if(OriginY_Sprite.mouse.released())
+    if(originY_Sprite.mouse.released())
     {
-        
-        OriginY_Per = PromptsForButtons("Origin Y = Vertical Axis", OriginY_Per);
-        if(OriginY_Per > 100) OriginY_Per = 100;
-        else if(OriginY_Per < 0) OriginY_Per = 0;
+        originY_Per = promptsForButtons("Origin Y = Vertical Axis", originY_Per);
+        if(originY_Per > 100) originY_Per = 100;
+        else if(originY_Per < 0) originY_Per = 0;
 
-        ChangeOriginYPosition();
+        changeOriginYPosition();
     }
 
-    if(ProjectileShape_Sprite.mouse.released())
+    if(projectileShape_Sprite.mouse.released())
     {
-
-        if(ProjectileShape == "Square")
-        {
-            ProjectileShape = "Circle";
-        }
-
-        else if(ProjectileShape == "Circle")
-        {
-            ProjectileShape = "Square"
-        }
-        
+        if(projectileShape == "Square") projectileShape = "Circle";
+        else projectileShape = "Square";
     }
 
-    if(ScreenSquare_Sprite.mouse.released())
+    if(screenSquare_Sprite.mouse.released())
     {
-        if(ScreenSquare == "False") ScreenSquare = "True";
-        else if (ScreenSquare == "True") ScreenSquare = "False";
+        if(screenSquare == "False") screenSquare = "True";
+        else screenSquare = "False";
     }
 
-    if(ProjectileCollisionWithWallMode_Sprite.mouse.released())
+    if(projectileCollisionWithWallMode_Sprite.mouse.released())
     {
 
-        if(ProjectileCollisionWithWallMode == "None") {
-            ProjectileCollisionWithWallMode = "Bounce";
-        }
-
-        else if(ProjectileCollisionWithWallMode == "Bounce") {
-            ProjectileCollisionWithWallMode = "Loop";
-        }
-
-        else if(ProjectileCollisionWithWallMode == "Loop") {
-            ProjectileCollisionWithWallMode = "None";
-        }
+        if(projectileCollisionWithWallMode == "None") projectileCollisionWithWallMode = "Bounce";
+        else if(projectileCollisionWithWallMode == "Bounce") projectileCollisionWithWallMode = "Loop";
+        else if(projectileCollisionWithWallMode == "Loop") projectileCollisionWithWallMode = "None";
 
     }
 
-    if(ProjectileLength_Sprite.mouse.released())
-    { 
-        ProjectileLength = PromptsForButtons("Projectile Length", ProjectileLength);
-    }
-    if(ProjectileWidth_Sprite.mouse.released())
-    { 
-        ProjectileWidth = PromptsForButtons("Projectile Width", ProjectileWidth);
-    }
+    if(projectileLength_Sprite.mouse.released()) projectileLength = promptsForButtons("Projectile Length", projectileLength);
+
+    if(projectileWidth_Sprite.mouse.released()) projectileWidth = promptsForButtons("Projectile Width", projectileWidth);
     
-    if(ProjectileColorType_Sprite.mouse.released())
+    if(projectileColorType_Sprite.mouse.released())
     {
-        if(ProjectileColorType == "Color") ProjectileColorType = "Random";
-        else if(ProjectileColorType == "Random") ProjectileColorType = "Rainbow";
-        else if(ProjectileColorType == "Rainbow") ProjectileColorType = "Color";
+        if(projectileColorType == "Color") projectileColorType = "Random";
+        else if(projectileColorType == "Random") projectileColorType = "Rainbow";
+        else if(projectileColorType == "Rainbow") projectileColorType = "Color";
     }
 
-    if(RainbowSpeed_Sprite.mouse.released())
+    if(rainbowSpeed_Sprite.mouse.released())
     {
-        RainbowSpeed = PromptsForButtons("Rainbow Speed   Max 255", RainbowSpeed);
-        if(RainbowSpeed > 255) RainbowSpeed = 255;
-        else if(RainbowSpeed < -255) RainbowSpeed = -255;
+        rainbowSpeed = promptsForButtons("Rainbow Speed   Max 255", rainbowSpeed);
+        if(rainbowSpeed > 255) rainbowSpeed = 255;
+        else if(rainbowSpeed < -255) rainbowSpeed = -255;
     }
 
-    if(ProjectileOutline_Sprite.mouse.released()) { ProjectileOutline = PromptsForButtons("Projectile Outline   0 for OFF", ProjectileOutline) };
+    if(projectileOutline_Sprite.mouse.released()) projectileOutline = promptsForButtons("Projectile Outline   0 for OFF", projectileOutline);
 
-    if(ProjectileNumber_Sprite.mouse.released())
+    if(projectileNumber_Sprite.mouse.released())
     {
-        ProjectileNumber = PromptsForButtons("Number of Projectiles allowed on Screen OR 0 for Infinity", ProjectileNumber);
-        if(ProjectileNumber == 0) ProjectileNumber = Infinity;
-        else if(String(ProjectileNumber).toLowerCase() == "infinity") ProjectileNumber = Infinity;
+        projectileNumber = promptsForButtons("Number of Projectiles allowed on Screen OR 0 for Infinity", projectileNumber);
+        if(projectileNumber == 0) projectileNumber = Infinity;
     }
 
-    if(RateOfFire_Sprite.mouse.released())
+    if(rateOfFire_Sprite.mouse.released())
     {
-        RateOfFire = PromptsForButtons("Rate of Fire   Max 100", RateOfFire);
-        if(RateOfFire > 100) RateOfFire = 100;
+        rateOfFire = promptsForButtons("Rate of Fire   Max 100", rateOfFire);
+        if(rateOfFire > 100) rateOfFire = 100;
     }
 
-    if(ProjectileSpeed_Sprite.mouse.released()) { ProjectileSpeed = PromptsForButtons("Projectile Speed", ProjectileSpeed) };
+    if(projectileSpeed_Sprite.mouse.released()) projectileSpeed = promptsForButtons("Projectile Speed", projectileSpeed);
 
-    if(ProjectileDirection_Sprite.mouse.released()) { ProjectileDirection = Number(PromptsForButtons("Origin Direction   0 to 360", ProjectileDirection)) };
+    if(projectileDirection_Sprite.mouse.released()) projectileDirection = Number(promptsForButtons("Origin Direction   0 to 360", projectileDirection));
 
-    if(ProjectileSpinSpeed_Sprite.mouse.released()) { ProjectileSpinSpeed = PromptsForButtons("Origin Spin Speed   + OR -", ProjectileSpinSpeed) };
+    if(projectileSpinSpeed_Sprite.mouse.released()) projectileSpinSpeed = promptsForButtons("Origin Spin Speed   + OR -", projectileSpinSpeed);
     
 }
 
-function PromptsForButtons(Text, Var2) {
-  var Var = prompt(Text);
+function promptsForButtons(text, variable_2) 
+{
+    var variable = prompt(text);
 
-  if (Var == null || Var == "") Var = Var2;
-
-  return Var;
+    if (variable == null || variable == "") variable = variable_2;
+    return variable;
 }
 
 //* Text:
 
-function CreateText(Name, Status, side, order)
+function createText(name, status, side, order)
 {
-    var Side;
+    var side;
 
-    if(side == 1) Side = offsetOffWall;
-    else if(side == 2) Side = width - offsetOffWall;
+    if(side == 1) side = offsetOffWall;
+    else if(side == 2) side = width - offsetOffWall;
 
-    text(Name, Side, (ButtonHeight * order) + (offsetBetweenButtons * order) - (ButtonHeight / 30 * 16));
+    text(name, side, (buttonHeight * order) + (offsetBetweenButtons * order) - (buttonHeight / 30 * 16));
 
-    textSize( Math.floor(ButtonHeight / 2) );
+    textSize( Math.floor(buttonHeight / 2) );
 
-    text(Status, Side, (ButtonHeight * order) + (offsetBetweenButtons * order) + (ButtonHeight / 30 * 5));
+    text(status, side, (buttonHeight * order) + (offsetBetweenButtons * order) + (buttonHeight / 30 * 5));
 
 }

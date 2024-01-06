@@ -1,39 +1,40 @@
-//# Anything functions relating to Projectiles.
+//# Anything functions relating to projectiles.
 
-function DeleteProjectiles()
+function deleteProjectiles()
 {
-    while(Projectiles.length >= 1) Projectiles[0].remove();
+    while(projectiles.length >= 1) projectiles[0].remove();
 }
 
-function CreateProjectiles()
+function createProjectiles()
 {
-    var CurrentProjectile;
+    var currentProjectile;
   
-    TimeSinceFired += deltaTime / 1000;
+    timeSinceFired += deltaTime / 1000;
     
-    if(GameStatus == "Running" && TimeSinceFired >= 1 / RateOfFire && (ProjectileNumber > Projectiles.length || ProjectileNumber == Infinity))
+    if(gameStatus == "Running" && timeSinceFired >= 1 / rateOfFire && (projectileNumber > projectiles.length || projectileNumber == Infinity))
     {
-        TimeSinceFired = 0;
+        timeSinceFired = 0;
 
-        CurrentProjectile = new Sprite();
-        CurrentProjectile.x = Origin.position.x;
-        CurrentProjectile.y = Origin.position.y;
-        CurrentProjectile.width = ProjectileWidth;
-        CurrentProjectile.height = ProjectileLength;
-        CurrentProjectile.Shape = ProjectileShape;
-        CurrentProjectile.direction = ProjectileDirection - 90;
-        CurrentProjectile.speed = ProjectileSpeed;
-        CurrentProjectile.rotation = ProjectileDirection;
-        CurrentProjectile.collider = "none";
-        CurrentProjectile.outline = ProjectileOutline;
+        currentProjectile = new Sprite();
+        currentProjectile.x = origin.position.x;
+        currentProjectile.y = origin.position.y;
+        currentProjectile.width = projectileWidth;
+        currentProjectile.height = projectileLength;
+        currentProjectile.Shape = projectileShape;
+        currentProjectile.direction = projectileDirection - 90;
+        currentProjectile.speed = projectileSpeed;
+        currentProjectile.setSpeed = projectileSpeed;
+        currentProjectile.rotation = projectileDirection;
+        currentProjectile.collider = "none";
+        currentProjectile.outline = projectileOutline;
 
-        if(ProjectileColorType == "Random" || ProjectileColorType == "random") CurrentProjectile.Color = color(random(255), random(255), random(255));
+        if(projectileColorType == "Random") currentProjectile.Color = color(random(255), random(255), random(255));
 
-        else if(ProjectileColorType == "Rainbow" || ProjectileColorType == "rainbow") CurrentProjectile.Color = color(Red, Green, Blue);
+        else if(projectileColorType == "Rainbow") currentProjectile.Color = color(red, green, blue);
 
-        else CurrentProjectile.Color = ProjectileColor;
+        else currentProjectile.Color = projectileColor;
  
-        CurrentProjectile.draw = function()
+        currentProjectile.draw = function()
         {
 
             if(this.outline == 0) fill(this.Color);
@@ -44,7 +45,7 @@ function CreateProjectiles()
             }
             strokeWeight(this.outline);
             
-
+            
             if(this.Shape == "Square")
             {
                 rect(0, 0, this.width, this.height);
@@ -57,7 +58,7 @@ function CreateProjectiles()
 
         }
         
-        Projectiles.push(CurrentProjectile);
+        projectiles.push(currentProjectile);
 
     }
     
