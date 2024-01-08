@@ -239,7 +239,7 @@ function presetButtonsControls()
         projectileLength = 75;
         projectileWidth = 100;
         projectileColorType = "Rainbow";
-        rainbowSpeed = 3;
+        rainbowSpeed = -3;
         projectileOutline = 1;
         projectileNumber = Infinity;
         rateOfFire = 100;
