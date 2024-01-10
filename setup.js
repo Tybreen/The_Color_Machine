@@ -9,9 +9,8 @@ function setup()
 
     textAlign(CENTER);
     rectMode(CORNERS);
-
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches) backgroundColor = "Black";
-    else backgroundColor = "White";
+    
+    backgroundColor = "Black";
 
     originX_Pix = width / 2;
     originY_Pix = height / 2; 

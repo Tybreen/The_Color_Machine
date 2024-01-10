@@ -11,7 +11,7 @@ function createProjectiles()
   
     timeSinceFired += deltaTime / 1000;
     
-    if(gameStatus == "Running" && timeSinceFired >= 1 / rateOfFire && (projectileNumber > projectiles.length || projectileNumber == Infinity))
+    if(gameStatus == "Running" && timeSinceFired >= 1 / rateOfFire && (projectileNumber > projectiles.length))
     {
         timeSinceFired = 0;
 
@@ -37,13 +37,18 @@ function createProjectiles()
         currentProjectile.draw = function()
         {
 
-            if(this.outline == 0) fill(this.Color);
+            if(this.outline == 0)
+            {
+                fill(this.Color);
+                noStroke();
+            }
             else
             {
                 fill(0, 0);
                 stroke(this.Color);
+                strokeWeight(this.outline);
             }
-            strokeWeight(this.outline);
+            
             
             
             if(this.Shape == "Square")

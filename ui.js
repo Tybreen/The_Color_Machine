@@ -219,8 +219,8 @@ function settingsButtonsControls()
 
     if(projectileNumber_Sprite.mouse.released())
     {
-        projectileNumber = promptsForButtons("Number of Projectiles allowed on Screen OR 0 for Infinity", projectileNumber);
-        if(projectileNumber == 0) projectileNumber = Infinity;
+        projectileNumber = promptsForButtons("Number of Projectiles allowed on Screen   Max 3000", projectileNumber);
+        if(projectileNumber > 3000) projectileNumber = 3000;
     }
 
     if(rateOfFire_Sprite.mouse.released())
@@ -231,9 +231,9 @@ function settingsButtonsControls()
 
     if(projectileSpeed_Sprite.mouse.released()) projectileSpeed = promptsForButtons("Projectile Speed", projectileSpeed);
 
-    if(projectileDirection_Sprite.mouse.released()) projectileDirection = Number(promptsForButtons("Origin Direction   0 to 360", projectileDirection));
+    if(projectileDirection_Sprite.mouse.released()) projectileDirection = promptsForButtons("Origin Direction   0 to 360", projectileDirection);
 
-    if(projectileSpinSpeed_Sprite.mouse.released()) projectileSpinSpeed = promptsForButtons("Origin Spin Speed   + OR -", projectileSpinSpeed);
+    if(projectileSpinSpeed_Sprite.mouse.released()) projectileSpinSpeed = promptsForButtons("Origin Spin Speed   Positive OR Negative", projectileSpinSpeed);
     
 }
 
@@ -241,8 +241,9 @@ function promptsForButtons(text, variable_2)
 {
     var variable = prompt(text);
 
-    if (variable == null || variable == "") variable = variable_2;
-    return variable;
+    if(isNaN(Number(variable)) || variable == null || variable == "") variable = variable_2;
+    
+    return Number(variable);
 }
 
 //* Text:

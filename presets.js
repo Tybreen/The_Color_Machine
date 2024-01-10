@@ -16,7 +16,7 @@ function presetButtonsControls()
         projectileColor = "Cyan";
         rainbowSpeed = 0;
         projectileOutline = 0;
-        projectileNumber = Infinity;
+        projectileNumber = 3000;
         rateOfFire = 3;
         projectileSpeed = 3;
         projectileDirection = 30;
@@ -57,31 +57,6 @@ function presetButtonsControls()
 
     if(preset3_Sprite.mouse.released())
     {
-        backgroundColor = "Black";
-        originX_Per = 50;
-        originY_Per = 50;
-        projectileShape = "Square";
-        projectileLength = 50;
-        projectileWidth = 10;
-        projectileColorType = "Rainbow";
-        projectileColor = 120;
-        rainbowSpeed = 10;
-        projectileOutline = 0;
-        projectileNumber = 175;
-        rateOfFire = 100;
-        projectileSpeed = 55;
-        projectileDirection = 246;
-        projectileSpinSpeed = 0;
-        screenSquare = "False";
-        projectileCollisionWithWallMode = "Loop";
-
-        changeOriginPosition();
-        deleteProjectiles();
-        setGameStatus("Running");
-    }
-
-    if(preset4_Sprite.mouse.released())
-    {
         backgroundColor = "White";
         originX_Per = 50;
         originY_Per = 50;
@@ -105,7 +80,7 @@ function presetButtonsControls()
         setGameStatus("Running");
     }
 
-    if(preset5_Sprite.mouse.released())
+    if(preset4_Sprite.mouse.released())
     {
         backgroundColor = "Black";
         originX_Per = 50;
@@ -130,7 +105,7 @@ function presetButtonsControls()
         setGameStatus("Running");
     }
 
-    if(preset6_Sprite.mouse.released())
+    if(preset5_Sprite.mouse.released())
     {
         backgroundColor = "Black";
         originX_Per = 50;
@@ -142,7 +117,7 @@ function presetButtonsControls()
         projectileColor = 120;
         rainbowSpeed = 15;
         projectileOutline = 1;
-        projectileNumber = Infinity;
+        projectileNumber = 3000;
         rateOfFire = 100;
         projectileSpeed = 2;
         projectileDirection = 0;
@@ -155,7 +130,7 @@ function presetButtonsControls()
         setGameStatus("Running");
     }
 
-    if(preset7_Sprite.mouse.released())
+    if(preset6_Sprite.mouse.released())
     {
         backgroundColor = "Black";
         originX_Per = 0;
@@ -180,7 +155,7 @@ function presetButtonsControls()
         setGameStatus("Running");
     }
 
-    if(preset8_Sprite.mouse.released())
+    if(preset7_Sprite.mouse.released())
     {
         backgroundColor = "Black";
         originX_Per = 50;
@@ -205,56 +180,7 @@ function presetButtonsControls()
         setGameStatus("Running");
     }
 
-    if(preset9_Sprite.mouse.released())
-    {
-        backgroundColor = "Black";
-        originX_Per = 50;
-        originY_Per = 50;
-        projectileShape = "Square";
-        projectileLength = 10;
-        projectileWidth = 300;
-        projectileColorType = "Random";
-        projectileColor = 120;
-        rainbowSpeed = 0;
-        projectileOutline = 0;
-        projectileNumber = 150;
-        rateOfFire = 100;
-        projectileSpeed = 1;
-        projectileDirection = 0;
-        projectileSpinSpeed = 450;
-        screenSquare = "True";
-        projectileCollisionWithWallMode = "Bounce";
-
-        changeOriginPosition();
-        deleteProjectiles();
-        setGameStatus("Running");
-    }
-
-    if(preset10_Sprite.mouse.released())
-    {
-        backgroundColor = "Black";
-        originX_Per = 50;
-        originY_Per = 50;
-        projectileShape = "Square";
-        projectileLength = 75;
-        projectileWidth = 100;
-        projectileColorType = "Rainbow";
-        rainbowSpeed = -3;
-        projectileOutline = 1;
-        projectileNumber = Infinity;
-        rateOfFire = 100;
-        projectileSpeed = 2.75;
-        projectileDirection = 0;
-        projectileSpinSpeed = 100;
-        screenSquare = "False";
-        projectileCollisionWithWallMode = "None";
-
-        changeOriginPosition();
-        deleteProjectiles();
-        setGameStatus("Running");
-    }
-
-    if(preset11_Sprite.mouse.released())
+    if(preset8_Sprite.mouse.released())
     {
         backgroundColor = "Black";
         originX_Per = 50;
@@ -279,7 +205,56 @@ function presetButtonsControls()
         setGameStatus("Running");
     }
 
-    if(preset12_Sprite.mouse.released())
+    if(preset9_Sprite.mouse.released())
+    {
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 75;
+        projectileWidth = 100;
+        projectileColorType = "Rainbow";
+        rainbowSpeed = -3;
+        projectileOutline = 1;
+        projectileNumber = 3000;
+        rateOfFire = 100;
+        projectileSpeed = 2.75;
+        projectileDirection = 0;
+        projectileSpinSpeed = 100;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "None";
+
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
+    }
+
+    if(preset10_Sprite.mouse.released())
+    {
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 10;
+        projectileWidth = 300;
+        projectileColorType = "Random";
+        projectileColor = 120;
+        rainbowSpeed = 0;
+        projectileOutline = 0;
+        projectileNumber = 150;
+        rateOfFire = 100;
+        projectileSpeed = 1;
+        projectileDirection = 0;
+        projectileSpinSpeed = 450;
+        screenSquare = "True";
+        projectileCollisionWithWallMode = "Bounce";
+
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
+    }
+
+    if(preset11_Sprite.mouse.released())
     {
         backgroundColor = "Black";
         originX_Per = 50;
@@ -298,6 +273,31 @@ function presetButtonsControls()
         projectileSpinSpeed = .1;
         screenSquare = "False";
         projectileCollisionWithWallMode = "Bounce";
+
+        changeOriginPosition();
+        deleteProjectiles();
+        setGameStatus("Running");
+    }
+
+    if(preset12_Sprite.mouse.released())
+    {
+        backgroundColor = "Black";
+        originX_Per = 50;
+        originY_Per = 50;
+        projectileShape = "Square";
+        projectileLength = 100;
+        projectileWidth = 15;
+        projectileColorType = "Random";
+        projectileColor = 120;
+        rainbowSpeed = 0;
+        projectileOutline = 0;
+        projectileNumber = 3000;
+        rateOfFire = 100;
+        projectileSpeed = 10;
+        projectileDirection = 0;
+        projectileSpinSpeed = 100100000000000000;
+        screenSquare = "False";
+        projectileCollisionWithWallMode = "None";
 
         changeOriginPosition();
         deleteProjectiles();

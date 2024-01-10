@@ -15,7 +15,7 @@
 
 */
 
-console.log("Date last updated: 1-6-24");
+console.log("Date last updated: 1-9-24");
 
 //* Main Vars:
 
@@ -117,7 +117,7 @@ var projectileColorType = "Color";
 var projectileColor = 120;
 var rainbowSpeed = 0;
 var projectileOutline = 0;
-var projectileNumber = Infinity;
+var projectileNumber = 3000;
 var rateOfFire = 1;
 var projectileSpeed = 1;
 var projectileDirection = 0;

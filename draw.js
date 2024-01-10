@@ -133,7 +133,7 @@ function draw()
             textSize( Math.floor(buttonHeight / 2) );
             createText("Origin Y", originY_Per + "%", 2, 2);
             textSize( Math.floor(buttonHeight / 2) );
-            createText("Rate of Fire", rateOfFire + " per Sec", 2, 3);
+            createText("Rate of Fire", rateOfFire, 2, 3);
             textSize( Math.floor(buttonHeight / 3.5) );
             createText("Number of Projectiles", projectileNumber, 2, 4);
             textSize( Math.floor(buttonHeight / 2.7) );
@@ -175,7 +175,7 @@ function draw()
             createText("Preset 9", "Click", 2, 2);
             createText("Preset 10", "Click", 2, 3);
             createText("Preset 11", "Click", 2, 4);
-            createText("Preset 12", "Click", 2, 5);
+            createText("Preset ???", "Click", 2, 5);
 
 
             if(backgroundColor_Save_1 == null)
@@ -210,9 +210,19 @@ function draw()
         else if(uiGroup == 2) o = "Close";
 
         createText("Presets", o, 1, 3);
+        if(instructionText) 
 
         textSize( Math.floor(buttonHeight / 2.5) );
         createText(projectiles.length + " Projectiles", startText, 2, 10);
+        
+        if(instructionText) 
+        {
+            fill("lime")
+            // For Preset Button.
+            createText("", "                                            <---------------", 1, 3);
+            // For Start Button.
+            createText("", "--------------->                                            ", 2, 10);
+        }
 
     }
 

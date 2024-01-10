@@ -47,7 +47,7 @@ function changeOriginYPosition()
   
 function originSpinSpeedProcessing()
 {
-    projectileDirection += Number(projectileSpinSpeed) / 10;
+    projectileDirection += projectileSpinSpeed / 10;
   
     if (projectileDirection >= 360) projectileDirection -= 360;
     else if (projectileDirection <= 0) projectileDirection += 360;
