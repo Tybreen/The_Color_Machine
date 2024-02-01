@@ -255,7 +255,7 @@ function createText(name, status, side, order)
     if(side == 1) side = offsetOffWall;
     else if(side == 2) side = width - offsetOffWall;
 
-    text(name, side, (buttonHeight * order) + (offsetBetweenButtons * order) - (buttonHeight / 30 * 16));
+    text(name, side, (buttonHeight * order) + (offsetBetweenButtons * order) - (buttonHeight / 30 * 18));
 
     textSize( Math.floor(buttonHeight / 2) );
 

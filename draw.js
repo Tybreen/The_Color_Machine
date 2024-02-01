@@ -147,7 +147,7 @@ function draw()
             textSize( Math.floor(buttonHeight / 3) );
             createText("With Wall Mode", projectileCollisionWithWallMode, 2, 9);
             textSize( Math.floor(buttonHeight / 3) );
-            text("Projectile Collision", width - offsetOffWall, (buttonHeight * 9) + (offsetBetweenButtons * 9) /* <-- Order of Buttons*/ - (buttonHeight * 17/20));
+            text("Projectile Collision", width - offsetOffWall, (buttonHeight * 9) + (offsetBetweenButtons * 9) /* <-- Order of Buttons*/ - (buttonHeight * 19/20));
             
         }
         
