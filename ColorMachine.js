@@ -1,3 +1,6 @@
+/*
+#---Plan:
+
 // Main Vars:
 
 var CanvasWidth;
@@ -691,123 +694,181 @@ function draw() {
     //console.log(RainbowSpeed);
 
 
-    //FPS:
+*--General:
+    --Adjust button sizing to screen.  ? √ ?  (I have to test on a phone... Waiting for release)
+    //--Color picker hand cursor is not working right.
 
-    fill(120);
+*--Features:
+    //--Pause feature.
+    //--Colliders ???
 
-    text("FPS " + FPS, CanvasWidth - 20, 10);
+#---Notes:
+
+    --Disabled the logo/playIntro() for p5play.
+
+*/
+
+console.log("Date last updated: 2-1-24");
+
+//* Main Vars:
+
+var gameStatus = "Stopped";
+
+var instructionText = true;
+
+var uiHide = false;
+
+var mouseMode = "ARROW";
+
+var uiGroup = 1;
+var createdGroup1 = false;
+var createdGroup2 = false;
+var createdGroup0 = false;
+
+var buttonWidth = 80;
+var buttonHeight = 30;
+
+var offsetOffWall = 60;
+var offsetBetweenButtons = 30;
+
+var colorPicker;
+
+var fps;
+
+var red = 255;
+var green = 0;
+var blue = 0;
+
+var offsetX_SS = 0;
+var offsetY_SS = 0;
+
+var timeSinceFired = 0;
+
+//* Groups:
+
+var projectiles;
+
+var standardButtons;
+var settingsButtons;
+var presetButtons;
+
+//* Sprites:
+
+var origin;
+
+var uiHide_Sprite;
+var backgroundColor_Sprite;
+var openPresets_Sprite;
+var start_Sprite;
+
+var originX_Sprite;
+var originY_Sprite;
+var projectileShape_Sprite;
+var projectileLength_Sprite;
+var projectileWidth_Sprite;
+var projectileColorType_Sprite;
+var rainbowSpeed_Sprite;
+var projectileOutline_Sprite;
+var projectileNumber_Sprite;
+var rateOfFire_Sprite;
+var projectileSpeed_Sprite;
+var projectileDirection_Sprite;
+var projectileSpinSpeed_Sprite;
+var screenSquare_Sprite;
+var projectileCollisionWithWallMode_Sprite;
+
+var preset1_Sprite;
+var preset2_Sprite;
+var preset3_Sprite;
+var preset4_Sprite;
+var preset5_Sprite;
+var preset6_Sprite;
+var preset7_Sprite;
+var preset8_Sprite;
+var preset9_Sprite;
+var preset10_Sprite;
+var preset11_Sprite;
+var preset12_Sprite;
+
+var save1_Sprite;
+var load1_Sprite;
+var save2_Sprite;
+var load2_Sprite;
+
+//* Statuses:
+
+var backgroundColor = "Black";
+
+var originX_Pix;
+var originY_Pix;
+var originX_Per = 50;
+var originY_Per = 50;
+var projectileShape = "Square";
+var projectileLength = 30;
+var projectileWidth = 10;
+var projectileColorType = "Color";
+var projectileColor = 120;
+var rainbowSpeed = 0;
+var projectileOutline = 0;
+var projectileNumber = 3000;
+var rateOfFire = 1;
+var projectileSpeed = 1;
+var projectileDirection = 0;
+var projectileSpinSpeed = 0;
+var screenSquare = "False";
+var projectileCollisionWithWallMode = "None";
+
+var startText = "Start";
+
+// Saved Statuses:
+
+var backgroundColor_Save_1;
+
+var originX_Per_Save_1;
+var originY_Per_Save_1;
+var projectileShape_Save_1;
+var projectileLength_Save_1;
+var projectileWidth_Save_1;
+var projectileColorType_Save_1;
+var projectileColor_Save_1;
+var rainbowSpeed_Save_1;
+var projectileOutline_Save_1;
+var projectileNumber_Save_1;
+var rateOfFire_Save_1;
+var projectileSpeed_Save_1;
+var projectileDirection_Save_1;
+var projectileSpinSpeed_Save_1;
+var screenSquare_Save_1;
+var projectileCollisionWithWallMode_Save_1;
+
+var backgroundColor_Save_2;
+
+var originX_Per_Save_2;
+var originY_Per_Save_2;
+var projectileShape_Save_2;
+var projectileLength_Save_2;
+var projectileWidth_Save_2;
+var projectileColorType_Save_2;
+var projectileColor_Save_2;
+var rainbowSpeed_Save_2;
+var projectileOutline_Save_2;
+var projectileNumber_Save_2;
+var rateOfFire_Save_2;
+var projectileSpeed_Save_2;
+var projectileDirection_Save_2;
+var projectileSpinSpeed_Save_2;
+var screenSquare_Save_2;
+var projectileCollisionWithWallMode_Save_2;
 
 
-    if(!InstructionText) this.Text.remove();
-
-    if(BackgroundColor == "Black") fill("White");
-    else if(BackgroundColor == "White") fill("Black");
-
-    textSize(15);
-
-    //text("UI", 60, 34);
-
-    if(UIHide) {
-        CreateText("UI", "Show", 1);
-        NumOfTexts = 0;
-        if(ColorPicker != null) ColorPicker.remove();
-        ColorPicker = null;
-    }
-    
-    else if(!UIHide) {
-        CreateText("UI", "Hide", 1);
-        if(ColorPicker == null) RecreateColorPicker();
-    }
-    
-    //console.log(ColorPicker);
-
-    if(!UIHide) {
-
-        drawSprites(Buttons);
-
-        // Left Texts:
-
-        textSize(10);
-
-        if(BackgroundColor == "Black") CreateText("Background Color","White", 1);
-        else if(BackgroundColor == "White") CreateText("Background Color", "Black", 1);
-
-        CreateText("Preset 1", "Click", 1);
-        CreateText("Preset 2", "Click", 1);
-        CreateText("Preset 3", "Click", 1);
-
-        CreateText("Save", "Click", 1);
-
-        var t = "Not Saved";
-        if(Saved == true) t = "Click";
-
-        CreateText("Load", t, 1);
-
-        textSize(8);
-        CreateText("Projectile Color Type", ProjectileColorType, 1);
-
-        textSize(11);
-        CreateText("Projectile Color", "", 1);
-
-        textSize(11);
-        CreateText("Rainbow Speed", RainbowSpeed, 1);
-
-        textSize(9);
-        CreateText("With Wall Mode", ProjectileCollisionWithWallMode, 1);
-
-        textSize(9);
-        text("Projectile Collision", 60, 50 * NumOfTexts - 26);
-
-        
-
-        NumOfTexts = 0;
-
-        // Right Texts:
-
-        textSize(10);
-        CreateText("Origin X", OriginX_Per + "%", 2);
-        CreateText("Origin Y", OriginY_Per + "%", 2);
-        CreateText("Projectile Shape", ProjectileShape, 2);
-        CreateText("Projectile Width", ProjectileWidth, 2);
-        CreateText("Projectile Length", ProjectileLength, 2);
-        CreateText("Rate of Fire", RateOfFire + " per Sec", 2);
-        textSize(8);
-        CreateText("Number of Projectiles", ProjectileNumber, 2);
-        CreateText("Projectile Speed", ProjectileSpeed, 2);
-        CreateText("Origin Direction", Math.floor(ProjectileDirection), 2);
-        textSize(9);
-        CreateText("Origin Spin Speed", ProjectileSpinSpeed, 2);
-        CreateText(Projectiles.length + " Projectiles", StartText, 2);
-
-        NumOfTexts = 0;
-    }
-
-}
-
-
-function Cleaner() {
-    
-    for(var i = 0; i < Projectiles.length;i++) {
-      
-        var Item = Projectiles.get(i);
-      
-        if(Item.position.x <= -15 || Item.position.x >= CanvasWidth + 15 || Item.position.y <= -15 || Item.position.y >= CanvasHeight + 15) {
-        
-            Item.remove();
-        
-            i--;
-        
-        }
-    }
-}
-
+// "Well hello there." -General Kenobi
 
 /*
 
-//Credits:
+#Credits:
 
-/Thank you Mom for helping me push through.
+*--Thank you Mom for helping me push through.
 
-/Thank you Codey for the help.
+*--Thank you Codey and Riley for the help.
 
 */
