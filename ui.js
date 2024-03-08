@@ -239,7 +239,7 @@ function settingsButtonsControls()
 
 function promptsForButtons(text, variable_2) 
 {
-    var variable = prompt(text);
+    var variable = prompt(text, variable_2);
 
     if(isNaN(Number(variable)) || variable == null || variable == "") variable = variable_2;
     
