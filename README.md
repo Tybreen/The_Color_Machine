@@ -2,6 +2,8 @@
 
 The Color Machine is a creative web app built with **p5.js**, **p5.play**, and **Planck.js**. It lets users interact with colorful physics-based animations in a fun and visual way.
 
+Here is the published link: https://tybreen.github.io/The_Color_Machine/
+
 ## 🎨 Features
 
 - Interactive canvas with physics
